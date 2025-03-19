@@ -10,7 +10,7 @@ const FAQSection = ({ faq }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost/wp-json/custom/v1/faqs');
+        const response = await fetch('https://dfweb-v2.onrender.com/api/v1/faqs');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

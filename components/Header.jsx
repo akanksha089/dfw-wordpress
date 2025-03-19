@@ -47,7 +47,7 @@ export default function Header() {
    useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch('http://localhost/wp-json/cmd/v1/menu-items');
+        const response = await fetch('https://dfweb-v2.onrender.com/api/v1/menu-items');
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }

@@ -54,7 +54,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchSliders = async () => {
       try {
-        const response = await fetch('http://localhost/wp-json/wp/v2/hero_slider');
+        const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-service');
         if (!response.ok) {
           throw new Error('Failed to fetch hero sliders');
         }

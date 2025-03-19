@@ -35,7 +35,7 @@ const Blog = ({ blog }) => {
     let line = [];
     const result = [];
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       // Push the word to the current line
       line.push(word);
 
