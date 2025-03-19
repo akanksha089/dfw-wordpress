@@ -77,7 +77,7 @@ export default function Post({ post, posts }) {
           <section className="service-details pt-130 pb-130">
             <div className="container">
               <div className="row gy-lg-0 gy-5">
-                {/* Post Content */}
+          
                 <div className="col-lg-8 col-md-12">
                   <div className="sidebar-content-wrap">
                     <div className="service-details-content">
