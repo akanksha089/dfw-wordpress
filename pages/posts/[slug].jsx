@@ -136,16 +136,32 @@ export async function getStaticPaths() {
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
-  const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
-  // const res = await fetch('http://dfw.local/wp-json/wp/v2/posts'); // Fetch all posts
-  const res = await fetch('http://localhost/wp-json/wp/v2/posts'); // Fetch all posts
-  const posts = await res.json();
+  try {
+    const post = await fetchPostBySlug(params.slug);
 
-  return {
-    props: {
-      post: post || null, // Return null if no post found
-      posts: posts || [], // Return an empty array if no posts found
-    },
-    revalidate: 10, // Revalidate the page every 10 seconds
-  };
+    const res = await fetch('http://localhost/wp-json/wp/v2/posts');
+    
+    if (!res.ok) {
+      throw new Error(`Failed to fetch posts: ${res.status} ${res.statusText}`);
+    }
+
+    const posts = await res.json();
+
+    return {
+      props: {
+        post: post || null,
+        posts: posts || [],
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        post: null,
+        posts: [],
+      },
+    };
+  }
 }
+
