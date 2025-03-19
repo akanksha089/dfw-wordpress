@@ -29,51 +29,35 @@ const ServiceDetails = () => {
     // const [loading, setLoading] = useState(true);
      const [error, setError] = useState(null);
 console.log('error', error)
-    useEffect(() => {
+useEffect(() => {
+    if (!slug) return;
 
-        if (!slug) return;
-        const apiUrl = `http://dfw.local/wp-json/custom/v1/service-detail/${slug}`;
+    const fetchAllData = async () => {
+        try {
+            // Fetch Service Detail
+            const response = await fetch(`http://dfw.local/wp-json/custom/v1/service-detail/${slug}`);
+            if (!response.ok) throw new Error("Failed to fetch service detail");
+            const result = await response.json();
+            setData(result);
+            
+            // Fetch Services List
+            const serviceResponse = await fetch("http://dfw.local/wp-json/custom/v1/services/");
+            if (!serviceResponse.ok) throw new Error("Failed to fetch services");
+            const serviceResult = await serviceResponse.json();
+            setServiceData(serviceResult);
 
-        const fetchData = async () => {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setData(result);
-            } catch (error) {
-                 setError(error);
-            } finally {
-                // setLoading(false);
-            }
-        };
-        const serviceData = async () => {
-            try {
-                const response = await fetch('http://dfw.local/wp-json/custom/v1/services/');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setServiceData(result);
-            } catch (error) {
-               setError(error);
-            } finally {
-                // setLoading(false);
-            }
-        };
-        const fetchSettingData = async () => {
-            try {
-                const result = await fetchContactData();
-                setSettingData(result); // Set the fetched data       
-            } catch (err) {
-                setError('Failed to load data');
-                console.error('Error fetching data:', err);
-            }
-        };
+            // Fetch Settings Data
+            const settingResult = await fetchContactData(); // Make sure fetchContactData is defined
+            setSettingData(settingResult);
 
-        fetchData(), serviceData(), fetchSettingData();
-    }, [slug]);
+        } catch (err) {
+            setError(err.message);
+            console.error("Error fetching data:", err);
+        }
+    };
+
+    fetchAllData();
+}, [slug]);
 
 
 console.log('serviceData', serviceData)
