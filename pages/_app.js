@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico" />
              {/* Add your global stylesheets here */}
-             <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+             {/* <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
                     <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
                     <link rel="stylesheet" href="/assets/css/venobox.min.css" />
                     <link rel="stylesheet" href="/assets/css/animate.min.css" />
@@ -96,7 +96,7 @@ function MyApp({ Component, pageProps }) {
                     <link rel="stylesheet" href="/assets/css/swiper.min.css" />
                     <link rel="stylesheet" href="/assets/css/main.css" />
                     <link rel="stylesheet" href="/assets/css/carouselTicker.css" />
-                    <link rel="stylesheet" href="/assets/css/main.css.map" />
+                    <link rel="stylesheet" href="/assets/css/main.css.map" /> */}
       </Head>
 
       <Component {...pageProps} />
