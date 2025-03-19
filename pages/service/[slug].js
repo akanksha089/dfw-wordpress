@@ -26,8 +26,8 @@ const ServiceDetails = () => {
     const [data, setData] = useState(null);
     const [settingdata, setSettingData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
     useEffect(() => {
 
@@ -43,9 +43,9 @@ const ServiceDetails = () => {
                 const result = await response.json();
                 setData(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         };
         const serviceData = async () => {
@@ -57,9 +57,9 @@ const ServiceDetails = () => {
                 const result = await response.json();
                 setServiceData(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         };
         const fetchSettingData = async () => {
@@ -67,7 +67,7 @@ const ServiceDetails = () => {
                 const result = await fetchContactData();
                 setSettingData(result); // Set the fetched data       
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };

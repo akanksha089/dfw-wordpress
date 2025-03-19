@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
+// import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -13,15 +13,15 @@ import { fetchContactData } from '../lib/api';
 function Service() {
     const [data, setData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
    useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await fetchContactData();
                 setData(result); // Set the fetched data       
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -38,9 +38,9 @@ function Service() {
                 const result = await response.json();
                 setServiceData(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         };
  serviceFetchData();

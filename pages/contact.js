@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -12,9 +11,8 @@ import { fetchContactData } from '../lib/api';
 //     </div>
 //   );
 function Contact() {
-    const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
-    const [error, setError] = useState(0);
+    // const [error, setError] = useState(0);
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -29,7 +27,7 @@ function Contact() {
                 const result = await fetchContactData();
                 setData(result); // Set the fetched data       
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -56,7 +54,7 @@ function Contact() {
             if (response.ok) {
                 const data = await response.json();
                 alert('Form submitted successfully');
-
+console.log('data', data)
                 // Optionally reset the form data
                 setFormData({
                     firstname: '',

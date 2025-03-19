@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -12,7 +11,7 @@ function About() {
     const [testiData, setTestiData] = useState(null);
     const [process, setprocess] = useState(null); // State to hold the process data
     const [pro, setpro] = useState(null); // State to hold the process data
-    const [error, setError] = useState(null);
+    // const [ setError] = useState(null);
     const [settingdata, setsettingData] = useState(null);
     const [company, setCompany] = useState(null); // State to hold the company data
     const [member, setMember] = useState(null); // State to hold the member data
@@ -37,7 +36,7 @@ function About() {
         let line = [];
         const result = [];
 
-        words.forEach((word, index) => {
+        words.forEach((word) => {
             // Push the word to the current line
             line.push(word);
 
@@ -113,7 +112,7 @@ function About() {
                     setTestimonial(testimonialData); // Set the found object into the 'process' state variable
                 }
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -127,7 +126,7 @@ function About() {
                 const result = await fetchContactData();
                 setsettingData(result); // Set the fetched data       
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -146,7 +145,7 @@ function About() {
                 console.log('result', result)
                 setpro(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             }
         };
 
@@ -160,7 +159,7 @@ function About() {
                 console.log('result', result)
                 setTeam(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             }
         };
 
@@ -174,7 +173,7 @@ function About() {
                 console.log('result', result)
                 setTestiData(result);
             } catch (error) {
-                setError(error);
+                // setError(error);
             }
         };
         const fetchInfoData = async () => {
@@ -190,7 +189,7 @@ function About() {
                     goal: result[2] || {},
                 });
             } catch (error) {
-                setError(error);
+                // setError(error);
             }
         };
 

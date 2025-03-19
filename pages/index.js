@@ -14,7 +14,7 @@ import { fetchCustomApiData, fetchContactData } from '../lib/api';
 
 export default function Home() {
   const [settingdata, setsettingData] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [about, setAbout] = useState(null); // State to hold the about data
   const [process, setprocess] = useState(null); // State to hold the process data
   const [service, setService] = useState(null); // State to hold the service data
@@ -51,7 +51,7 @@ export default function Home() {
           setBlog(blogData); // Set the found object into the 'process' state variable
         } 
       } catch (err) {
-        setError('Failed to load data');
+        // setError('Failed to load data');
         console.error('Error fetching data:', err);
       }
     };
@@ -66,7 +66,7 @@ export default function Home() {
                 const result = await fetchContactData();
                 setsettingData(result); // Set the fetched data       
             } catch (err) {
-                setError('Failed to load data');
+                // setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
