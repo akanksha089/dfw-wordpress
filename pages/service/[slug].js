@@ -35,13 +35,15 @@ useEffect(() => {
     const fetchAllData = async () => {
         try {
             // Fetch Service Detail
-            const response = await fetch(`http://dfw.local/wp-json/custom/v1/service-detail/${slug}`);
+            // const response = await fetch(`http://dfw.local/wp-json/custom/v1/service-detail/${slug}`);
+            const response = await fetch(`https://dfweb-v2.onrender.com/api/v1/api-services/${slug}`);
             if (!response.ok) throw new Error("Failed to fetch service detail");
             const result = await response.json();
             setData(result);
             
             // Fetch Services List
-            const serviceResponse = await fetch("http://dfw.local/wp-json/custom/v1/services/");
+            // const serviceResponse = await fetch("http://dfw.local/wp-json/custom/v1/services/");
+            const serviceResponse = await fetch("https://dfweb-v2.onrender.com/api/v1/api-services");
             if (!serviceResponse.ok) throw new Error("Failed to fetch services");
             const serviceResult = await serviceResponse.json();
             setServiceData(serviceResult);
