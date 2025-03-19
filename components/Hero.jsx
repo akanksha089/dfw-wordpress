@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import '../styles/custom.css';
+//  import '../styles/custom.css';
 import { EffectFade, Navigation } from 'swiper/modules';
 import { gsap } from 'gsap'; // Import GSAP
 
