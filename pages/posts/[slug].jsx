@@ -120,7 +120,8 @@ export default function Post({ post, posts }) {
 
 // Fetch all paths for static generation
 export async function getStaticPaths() {
-  const res = await fetch('http://dfw.local/wp-json/wp/v2/posts');
+  // const res = await fetch('http://dfw.local/wp-json/wp/v2/posts');
+  const res = await fetch('http://localhost/wp-json/wp/v2/posts');
   const posts = await res.json();
 
   const paths = posts.map(post => ({
@@ -136,7 +137,8 @@ export async function getStaticPaths() {
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
   const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
-  const res = await fetch('http://dfw.local/wp-json/wp/v2/posts'); // Fetch all posts
+  // const res = await fetch('http://dfw.local/wp-json/wp/v2/posts'); // Fetch all posts
+  const res = await fetch('http://localhost/wp-json/wp/v2/posts'); // Fetch all posts
   const posts = await res.json();
 
   return {
