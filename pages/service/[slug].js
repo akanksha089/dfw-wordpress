@@ -88,9 +88,7 @@ console.log('serviceData', serviceData)
                         </div>
                     </div>
                     <Sidebar data={settingdata}/>
-                    {/* <div id="preloader">
-           <div className="loading" data-loading-text="Runok"></div>
-       </div> */}
+                
                     <div id="smooth-wrapper">
                         <div id="smooth-content">
                             <section className="page-header" style={backgroundStyle}>
