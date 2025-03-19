@@ -43,7 +43,7 @@ function Contact() {
 
         try {
             // Send the form data to the WordPress API
-            const response = await fetch('http://dfw.local/wp-json/custom-api/v1/submit/', {
+            const response = await fetch('http://localhost/wp-json/custom-api/v1/submit/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

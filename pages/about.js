@@ -137,7 +137,7 @@ console.log('error', error)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://dfw.local/wp-json/custom/v1/custom_processes');
+                const response = await fetch('http://localhost/wp-json/custom/v1/custom_processes');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -151,7 +151,7 @@ console.log('error', error)
 
         const fetchTeamData = async () => {
             try {
-                const response = await fetch('http://dfw.local/wp-json/custom/v1/team-member-api');
+                const response = await fetch('http://localhost/wp-json/custom/v1/team-member-api');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -165,7 +165,7 @@ console.log('error', error)
 
         const fetchTestiData = async () => {
             try {
-                const response = await fetch('http://dfw.local/wp-json/custom/v1/testimonial-api');
+                const response = await fetch('http://localhost/wp-json/custom/v1/testimonial-api');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -178,7 +178,7 @@ console.log('error', error)
         };
         const fetchInfoData = async () => {
             try {
-                const response = await fetch('http://dfw.local/wp-json/dynamic-api/v1/info');
+                const response = await fetch('http://localhost/wp-json/dynamic-api/v1/info');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

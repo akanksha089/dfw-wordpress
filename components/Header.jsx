@@ -9,13 +9,13 @@ export default function Header() {
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar visibility
   const router = useRouter();
-  const isHomePage = router.pathname === '/';
+  // const isHomePage = router.pathname === '/';
   const [menuItems, setMenuItems] = useState([]); // Menu data state
   const [serviceData, setServiceData] = useState([]); // Service data state
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://dfw.local/wp-json/custom/v1/services/');
+        const response = await fetch('http://localhost/wp-json/custom/v1/services/');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -47,7 +47,7 @@ export default function Header() {
    useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch('http://dfw.local/wp-json/cmd/v1/menu-items');
+        const response = await fetch('http://localhost/wp-json/cmd/v1/menu-items');
         if (!response.ok) {
           throw new Error('Failed to fetch menu items');
         }

@@ -11,7 +11,7 @@ const ProcessSection = ({ process }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://dfw.local/wp-json/custom/v1/process-api');
+        const response = await fetch('http://localhost/wp-json/custom/v1/process-api');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

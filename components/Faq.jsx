@@ -6,10 +6,11 @@ const FAQSection = ({ faq }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log('error,', error, loading)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://dfw.local/wp-json/custom/v1/faqs');
+        const response = await fetch('http://localhost/wp-json/custom/v1/faqs');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

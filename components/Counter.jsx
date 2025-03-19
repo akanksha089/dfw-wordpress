@@ -60,7 +60,7 @@ const Counter = ({ growth }) => {
   }, []);
   // Fetch counter data from the API
   useEffect(() => {
-    fetch('http://dfw.local/wp-json/count-api/v1/data')
+    fetch('http://localhost/wp-json/count-api/v1/data')
       .then((response) => response.json())
       .then((data) => {
         setCounterData(data);
