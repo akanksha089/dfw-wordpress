@@ -27,8 +27,8 @@ const ServiceDetails = () => {
     const [settingdata, setSettingData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
     // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-
+     const [error, setError] = useState(null);
+console.log('error', error)
     useEffect(() => {
 
         if (!slug) return;
@@ -43,7 +43,7 @@ const ServiceDetails = () => {
                 const result = await response.json();
                 setData(result);
             } catch (error) {
-                // setError(error);
+                 setError(error);
             } finally {
                 // setLoading(false);
             }
@@ -57,7 +57,7 @@ const ServiceDetails = () => {
                 const result = await response.json();
                 setServiceData(result);
             } catch (error) {
-                // setError(error);
+               setError(error);
             } finally {
                 // setLoading(false);
             }
@@ -67,7 +67,7 @@ const ServiceDetails = () => {
                 const result = await fetchContactData();
                 setSettingData(result); // Set the fetched data       
             } catch (err) {
-                // setError('Failed to load data');
+                setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };

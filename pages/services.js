@@ -14,14 +14,15 @@ function Service() {
     const [data, setData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
     // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
+    console.log('error', error)
    useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await fetchContactData();
                 setData(result); // Set the fetched data       
             } catch (err) {
-                // setError('Failed to load data');
+               setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -38,7 +39,7 @@ function Service() {
                 const result = await response.json();
                 setServiceData(result);
             } catch (error) {
-                // setError(error);
+              setError(error);
             } finally {
                 // setLoading(false);
             }
