@@ -90,7 +90,7 @@ const Blog = ({ blog }) => {
         </div>
         <div className="row gy-lg-0 gy-4">
 
-          {posts.map((post, index) => (
+          {posts.map((post) => (
             <div className="col-md-6" key={post.id}>
               <div className="post-card-2 fade-top">
                 <div className="overlay"></div>
