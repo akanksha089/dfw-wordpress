@@ -1,7 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function Footer({data}) {
+export default function Footer() {
+
+  const data = {
+    address: "123 Street, City, Country",
+    phone: "+000123456789",
+    email: "info@example.com",
+    fb_url: "https://facebook.com",
+    instagram_url: "https://instagram.com",
+    twitter_url: "https://twitter.com",
+    google_url: "https://google.com",
+  };
   const socialMediaLinks = [
     { platform: 'facebook', iconClass: 'fab fa-facebook-f', url: data?.fb_url },
     { platform: 'pinterest', iconClass: 'fab fa-pinterest', url: data?.pinterest_url },

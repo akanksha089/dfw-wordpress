@@ -1,228 +1,114 @@
-import React, { useState, useEffect, useRef } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-//  import '../styles/custom.css';
-import { EffectFade, Navigation } from 'swiper/modules';
+import React, { useEffect, useRef } from 'react';
+// import Image from 'next/image';
+import Link from 'next/link';
 import { gsap } from 'gsap'; // Import GSAP
 
 const Hero = () => {
-  const [sliders, setSliders] = useState([]);
-  const [activeTab, setActiveTab] = useState(0);  // State to track active tab
-  const swiperRef = useRef(null);  // Reference to the Swiper instance
-  const [isMounted, setIsMounted] = useState(false); // Track if the component is mounted
   const titleRef = useRef(null);
   const subTitleRef = useRef(null);
   const bottomTitleRef = useRef(null);
 
   useEffect(() => {
-    // Ensure the component is mounted in the browser
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) return; // Wait for the component to mount
-
-    // Check if refs are valid
-    if (!subTitleRef.current || !titleRef.current || !bottomTitleRef.current) {
-      console.error("Refs are not properly assigned.");
-      return;
-    }
-
-    // GSAP animations
+    // GSAP animations after component mounts
     const timeline = gsap.timeline();
+
+    // Animate all headings together
     timeline
       .fromTo(
-        subTitleRef.current.querySelectorAll(".char"),
+        subTitleRef.current.querySelectorAll('.char'),
         { y: 100, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.9, stagger: 0.03 }
       )
       .fromTo(
-        titleRef.current.querySelectorAll(".char"),
+        titleRef.current.querySelectorAll('.char'),
         { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, stagger: 0.03 }
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.03 },
+        '-=0.5' // Overlap the animation by 0.5 seconds
       )
       .fromTo(
-        bottomTitleRef.current.querySelectorAll(".char"),
+        bottomTitleRef.current.querySelectorAll('.char'),
         { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, stagger: 0.03 }
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.03 },
+        '-=0.5' // Overlap the animation by 0.5 seconds
       );
-  }, [isMounted]); // Only run animations after the component is mounted
-
-
-  useEffect(() => {
-    const fetchSliders = async () => {
-      try {
-        const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-service');
-        if (!response.ok) {
-          throw new Error('Failed to fetch hero sliders');
-        }
-        const data = await response.json();
-        setSliders(data);
-      } catch (error) {
-        console.error('Error fetching hero slider:', error);
-      }
-    };
-
-    fetchSliders();
-  }, []);
-  // Handle tab click
-  const handleTabClick = (index) => {
-    setActiveTab(index);  // Set active tab
-    if (swiperRef.current) {
-      swiperRef.current.swiper.slideTo(index);  // Change slide on tab click
-    }
-  };
-
-
-  useEffect(() => {
-    console.log("SubTitle:", subTitleRef.current);
-    console.log("Title:", titleRef.current);
-    console.log("BottomTitle:", bottomTitleRef.current);
   }, []);
 
   return (
-    <div className="slider-section">
-      <div className="runok-slider swiper-container">
-        <Swiper className="swiper-wrapper"
-          ref={swiperRef}
-          loop={true}  // Enable looping for slides
-          autoplay={{ delay: 2000, disableOnInteraction: false }}  // Auto-slide every 3 seconds
-          effect={'fade'}
-          onSlideChange={(swiper) => setActiveTab(swiper.activeIndex)}
-          grabCursor={true}
-          modules={[EffectFade, Navigation]}
-        >
-          {/* Slide 1 */}
-          {sliders.map((slider) => (
-            <SwiperSlide className="swiper-slide" key={slider.id}>
-              <div className="slider-item">
-                <div className="overlay"></div>
-                <div
-                  className="shape"
-                  data-animation="runok-fadeInUp"
-                  data-delay="1000ms"
-                  data-duration="1200ms"
-                >
-                  <img
-                    src="assets/img/shapes/slider-shape-1.png"
-                    alt="shape"
-                  />
-                </div>
-                <div className="slide-img-wrap">
-                  <img
-                    decoding="async"
-                    src={slider.image}
-                    alt={slider.title.rendered}
-                    className="slide-img kenburns kenburns-top"
-                  />
-                </div>
-                <div className="slider-content-wrap">
-                  <div className="container">
-                    <div className="hero-content-wrap">
-                      <div className="hero-content ">
-                        <h4 className="sub-title anim-text custom-heading" ref={subTitleRef}>
-                          <div className="line text-white" style={{ display: "block", textAlign: "start", width: "100%" }}>
-                            {"Transforming".split("").map((char, index) => (
-                              <div
-                                className="char"
-                                key={index}
-                                style={{ display: "inline-block", transform: "translate(0px, 0%)" }}
-                              >
-                                {char}
-                              </div>
-                            ))}
-                          </div>
-                        </h4>
-                        <h2 className="title anim-text" ref={titleRef}>
-                          <div className="line text-white" style={{ display: "block", textAlign: "start", width: "100%" }}>
-                            {"Visions into".split("").map((char, index) => (
-                              <div
-                                className="char"
-                                key={index}
-                                style={{ display: "inline-block", transform: "translate(0px, 0%)" }}
-                              >
-                                {char === " " ? "\u00A0" : char}
-                              </div>
-                            ))}
-                          </div>
-                        </h2>
-                        <h3 className="bottom-title anim-text custom-heading" ref={bottomTitleRef}>
-                          <div className="line text-white" style={{ display: "block", textAlign: "start", width: "100%" }}>
-                            {"Digital Reality".split("").map((char, index) => (
-                              <div
-                                className="char"
-                                key={index}
-                                style={{ display: "inline-block", transform: "translate(0px, 0%)" }}
-                              >
-                                {char === " " ? "\u00A0" : char}
-                              </div>
-                            ))}
-                          </div>
-                        </h3>
-                      </div>
-                      {/* <div className="hero-content">
-                        <h4 className="sub-title anim-text custom-heading" ref={subTitleRef}>
-                          <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
-                            {'Transforming'.split('').map((char, index) => (
-                              <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>{char}</div>
-                            ))}
-                          </div>
-                        </h4>
-                        <h2 className="title anim-text" ref={titleRef}>
-                          <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
-                            {'Visions into'.split('').map((char, index) => (
-                              <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>
-                                {char === ' ' ? '\u00A0' : char}
-                              </div>
-                            ))}
-                          </div>
-                        </h2>
-                        <h3 className="bottom-title anim-text custom-heading" ref={bottomTitleRef}>
-                          <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
-                            {'Digital Reality'.split('').map((char, index) => (
-                              <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>{char === ' ' ? '\u00A0' : char}</div>
-                            ))}
-                          </div>
-                        </h3>
-                      </div> */}
-                      {/* <div
-                      className="slider-btn-wrap"
-                      data-animation="runok-fadeInUp"
-                      data-delay="1200ms"
-                      data-duration="1400ms"
-                    >
-                      <a href="about.html" className="slider-btn">
-                        <i className="fa-thin fa-arrow-right"></i>
-                      </a>
-                    </div> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-
-          ))}
-        </Swiper>
+    <section className="hero-section">
+      <div className="hero-bg-shape">
+        <img
+          src="/assets/img/bg-img/hero-bg-shape.png"
+          alt="shape"
+          style={{ objectFit: 'cover' }}
+        />
       </div>
+      <div className="hero-shape">
+        <img
+          src="/assets/img/shapes/hero-shape-1.png"
+          alt="shape"
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+      <div className="hero-images">
+        <img
+          src="/assets/img/images/hero-img-1.png"
+          alt="hero"
+          style={{ objectFit: 'cover' }}
+        />
+        <img
+          src="/assets/img/images/hero-img-2.png"
+          alt="hero"
+          style={{ objectFit: 'cover' }}
+        />
+        <img
+          src="/assets/img/images/hero-img-3.png"
+          alt="hero"
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+      <div className="hero-img">
+        <img
+          src="/assets/img/images/hero-img.png"
+          alt="hero"
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+      <div className="container">
+        <div className="hero-content">
+          <h4 className="sub-title anim-text custom-heading" ref={subTitleRef}>
+            <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
+              {'Transforming'.split('').map((char, index) => (
+                <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>{char}</div>
+              ))}
+            </div>
+          </h4>
 
-      {/* Slider Tabs */}
-      <div className="slider-tab-wrap">
-        <div className="swiper slider-tab">
-          <Swiper className="swiper-wrapper" slidesPerView={3}
-            spaceBetween={30} >
-            {sliders.map((slider, index) => (
-              <SwiperSlide className="swiper-slide" key={slider.id}>
-                <div className={`slider-tab-btn ${activeTab === index ? 'active bg-white text-[#11151C] border-2 border-blue-500' : 'text-white'}`}
-                  onClick={() => handleTabClick(index)}  // Set active tab on click
-                >{slider.title}</div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <h2 className="title anim-text" ref={titleRef}>
+            <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
+              {'Visions into'.split('').map((char, index) => (
+                <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>
+                  {char === ' ' ? '\u00A0' : char}
+                </div>
+              ))}
+            </div>
+          </h2>
+
+
+          <h3 className="bottom-title anim-text custom-heading" ref={bottomTitleRef}>
+            <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
+              {'Digital Reality'.split('').map((char, index) => (
+                <div className="char" key={index} style={{ display: 'inline-block', transform: 'translate(0px, 0%)' }}>{char === ' ' ? '\u00A0' : char}</div>
+              ))}
+            </div>
+          </h3>
+
+          <Link href="/about" className="hero-btn">
+            <i className="fa-thin fa-arrow-right"></i>
+          </Link>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
