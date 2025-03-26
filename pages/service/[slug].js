@@ -27,8 +27,9 @@ const ServiceDetails = () => {
     const [settingdata, setSettingData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const setError = useState(null);
     const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
+    console.log('loading', loading)
     useEffect(() => {
 
         if (!slug) return;
@@ -72,7 +73,7 @@ const ServiceDetails = () => {
             }
         };
 
-        fetchData(), serviceData(), fetchSettingData();
+        fetchData(); serviceData(); fetchSettingData();
     }, [slug]);
 
 

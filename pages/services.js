@@ -16,6 +16,7 @@ function Service() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
+    console.log('loadingerror', loading, error)
    useEffect(() => {
         const fetchData = async () => {
             try {

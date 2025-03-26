@@ -12,9 +12,9 @@ import { fetchContactData } from '../lib/api';
 //     </div>
 //   );
 function Contact() {
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
-    const [error, setError] = useState(0);
+    const  setError = useState(0);
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -57,6 +57,7 @@ function Contact() {
             if (response.ok) {
                 const data = await response.json();
                 alert('Form submitted successfully');
+console.log(data);
 
                 // Optionally reset the form data
                 setFormData({

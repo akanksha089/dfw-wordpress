@@ -12,7 +12,7 @@ function About() {
     const [testiData, setTestiData] = useState(null);
     const [processes, setprocess] = useState(null); // State to hold the process data
     const [pro, setpro] = useState(null); // State to hold the process data
-    const [error, setError] = useState(null);
+    const setError = useState(null);
     const [settingdata, setsettingData] = useState(null);
     const [company, setCompany] = useState(null); // State to hold the company data
     const [member, setMember] = useState(null); // State to hold the member data
@@ -37,7 +37,7 @@ function About() {
         let line = [];
         const result = [];
 
-        words.forEach((word, index) => {
+        words.forEach((word) => {
             // Push the word to the current line
             line.push(word);
 
