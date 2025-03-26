@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -11,8 +12,9 @@ import { fetchContactData } from '../lib/api';
 //     </div>
 //   );
 function Contact() {
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
-    // const [error, setError] = useState(0);
+    const [error, setError] = useState(0);
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -21,13 +23,14 @@ function Contact() {
         querytopic: '',
         message: ''
     });
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await fetchContactData();
                 setData(result); // Set the fetched data       
             } catch (err) {
-                // setError('Failed to load data');
+                setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -43,7 +46,7 @@ function Contact() {
 
         try {
             // Send the form data to the WordPress API
-            const response = await fetch('https://dfweb-v2.onrender.com/api/v1/submit/', {
+            const response = await fetch( `${BASE_URL}/custom-api/v1/submit/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +57,7 @@ function Contact() {
             if (response.ok) {
                 const data = await response.json();
                 alert('Form submitted successfully');
-console.log('data', data)
+
                 // Optionally reset the form data
                 setFormData({
                     firstname: '',

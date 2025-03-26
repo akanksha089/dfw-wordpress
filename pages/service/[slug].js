@@ -26,40 +26,54 @@ const ServiceDetails = () => {
     const [data, setData] = useState(null);
     const [settingdata, setSettingData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
-    // const [loading, setLoading] = useState(true);
-     const [error, setError] = useState(null);
-console.log('error', error)
-useEffect(() => {
-    if (!slug) return;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
+    useEffect(() => {
 
-    const fetchAllData = async () => {
-        try {
-            // Fetch Service Detail
-            // const response = await fetch(`http://dfw.local/wp-json/custom/v1/service-detail/${slug}`);
-            const response = await fetch(`https://dfweb-v2.onrender.com/api/v1/api-services/${slug}`);
-            if (!response.ok) throw new Error("Failed to fetch service detail");
-            const result = await response.json();
-            setData(result);
-            
-            // Fetch Services List
-            // const serviceResponse = await fetch("http://dfw.local/wp-json/custom/v1/services/");
-            const serviceResponse = await fetch("https://dfweb-v2.onrender.com/api/v1/api-services");
-            if (!serviceResponse.ok) throw new Error("Failed to fetch services");
-            const serviceResult = await serviceResponse.json();
-            setServiceData(serviceResult);
+        if (!slug) return;
+        const apiUrl = `${BASE_URL}/custom/v1/service-detail/${slug}`;
 
-            // Fetch Settings Data
-            const settingResult = await fetchContactData(); // Make sure fetchContactData is defined
-            setSettingData(settingResult);
+        const fetchData = async () => {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        const serviceData = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/custom/v1/services/`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setServiceData(result);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        const fetchSettingData = async () => {
+            try {
+                const result = await fetchContactData();
+                setSettingData(result); // Set the fetched data       
+            } catch (err) {
+                setError('Failed to load data');
+                console.error('Error fetching data:', err);
+            }
+        };
 
-        } catch (err) {
-            setError(err.message);
-            console.error("Error fetching data:", err);
-        }
-    };
-
-    fetchAllData();
-}, [slug]);
+        fetchData(), serviceData(), fetchSettingData();
+    }, [slug]);
 
 
 console.log('serviceData', serviceData)
@@ -88,7 +102,9 @@ console.log('serviceData', serviceData)
                         </div>
                     </div>
                     <Sidebar data={settingdata}/>
-                
+                    {/* <div id="preloader">
+           <div className="loading" data-loading-text="Runok"></div>
+       </div> */}
                     <div id="smooth-wrapper">
                         <div id="smooth-content">
                             <section className="page-header" style={backgroundStyle}>

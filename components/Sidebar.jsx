@@ -1,21 +1,17 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-export default function Sidebar({ onClose }) {
-  const staticData = {
-    address: "123 Street, City, Country",
-    phone: "+000123456789",
-    email: "info@example.com",
-    fb_url: "https://facebook.com",
-    instagram_url: "https://instagram.com",
-    twitter_url: "https://twitter.com",
-    google_url: "https://google.com",
-  };
-
+export default function Sidebar({ data, onClose }) {
   return (
-    <div className="sidebar-area">
+    <div id="" className="sidebar-area">
       <button className="sidebar-trigger close" onClick={onClose}>
-        <svg width="16px" height="12.7px" viewBox="0 0 16 12.7">
+        <svg
+          className=""
+          width="16px"
+          height="12.7px"
+          viewBox="0 0 16 12.7"
+          style={{ enableBackground: 'new 0 0 16 12.7' }}
+        >
           <g>
             <rect
               x="0"
@@ -43,17 +39,15 @@ export default function Sidebar({ onClose }) {
             <img src="/assets/img/logo/dfw.png" alt="logo" />
           </Link>
         </div>
+        <div className="side-menu-wrap"></div>
         <div className="side-menu-about">
           <div className="side-menu-header">
             <h3>About Us</h3>
           </div>
           <p>
-            Welcome to our website! We provide high-quality services to help your
-            business grow and succeed. Contact us today!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat.
           </p>
-          <Link href="/contact" className="rr-primary-btn">
-            Contact Us
-          </Link>
+          <Link href="/contact" className="rr-primary-btn">Contact Us</Link>
         </div>
         <div className="side-menu-contact">
           <div className="side-menu-header">
@@ -62,39 +56,50 @@ export default function Sidebar({ onClose }) {
           <ul className="side-menu-list">
             <li>
               <i className="fas fa-map-marker-alt"></i>
-              <p>{staticData.address}</p>
+              <p>{data && data.address ? data.address : ""}</p>
             </li>
             <li>
               <i className="fas fa-phone"></i>
-              <a href={`tel:${staticData.phone}`}>{staticData.phone}</a>
+              <a href="tel:+000123456789">{data && data.phone ? data.phone : ""}</a>
             </li>
             <li>
               <i className="fas fa-envelope-open-text"></i>
-              <Link href={`mailto:${staticData.email}`}>{staticData.email}</Link>
+              <Link href={data && data.email ? `mailto:${data.email}` : ""}>{data && data.email ? data.email : ""}</Link>
             </li>
           </ul>
         </div>
         <ul className="side-menu-social">
-          <li className="facebook">
-            <Link href={staticData.fb_url}>
-              <i className="fab fa-facebook-f"></i>
-            </Link>
-          </li>
-          <li className="instagram">
-            <Link href={staticData.instagram_url}>
-              <i className="fab fa-instagram"></i>
-            </Link>
-          </li>
-          <li className="twitter">
-            <Link href={staticData.twitter_url}>
-              <i className="fab fa-twitter"></i>
-            </Link>
-          </li>
-          <li className="g-plus">
-            <Link href={staticData.google_url}>
-              <i className="fab fa-google-plus"></i>
-            </Link>
-          </li>
+          {data && data.fb_url && (
+            <li className="facebook">
+              <Link href={data.fb_url}>
+                <i className="fab fa-facebook-f"></i>
+              </Link>
+            </li>
+          )}
+
+          {data && data.instagram_url && (
+            <li className="instagram">
+              <Link href={data.instagram_url}>
+                <i className="fab fa-instagram"></i>
+              </Link>
+            </li>
+          )}
+
+          {data && data.twitter_url && (
+            <li className="twitter">
+              <Link href={data.twitter_url}>
+                <i className="fab fa-twitter"></i>
+              </Link>
+            </li>
+          )}
+
+          {data && data.google_url && (
+            <li className="g-plus">
+              <Link href={data.google_url}>
+                <i className="fab fa-google-plus"></i>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>

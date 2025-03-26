@@ -4,11 +4,11 @@ function Service({ service }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-service');
+                const response = await fetch(`${BASE_URL}/custom/v1/services/`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

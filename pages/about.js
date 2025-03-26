@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+// import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -9,7 +10,7 @@ import { fetchCustomApiData, fetchContactData } from '../lib/api';
 function About() {
     const [about, setAbout] = useState(null);
     const [testiData, setTestiData] = useState(null);
-    const [process, setprocess] = useState(null); // State to hold the process data
+    const [processes, setprocess] = useState(null); // State to hold the process data
     const [pro, setpro] = useState(null); // State to hold the process data
     const [error, setError] = useState(null);
     const [settingdata, setsettingData] = useState(null);
@@ -22,7 +23,7 @@ function About() {
         vision: {},
         goal: {},
     });
-console.log('error', error)
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     const splitTextMulti = (text) => {
         if (!text) return null;
 
@@ -36,7 +37,7 @@ console.log('error', error)
         let line = [];
         const result = [];
 
-        words.forEach((word) => {
+        words.forEach((word, index) => {
             // Push the word to the current line
             line.push(word);
 
@@ -97,19 +98,19 @@ console.log('error', error)
                 }
                 const processData = result.find(item => item.name === "Work Process Section");
                 if (processData) {
-                    setprocess(processData); // Set the found object into the 'process' state variable
+                    setprocess(processData);
                 }
                 const companyData = result.find(item => item.name === "About Company Section");
                 if (companyData) {
-                    setCompany(companyData); // Set the found object into the 'process' state variable
+                    setCompany(companyData); 
                 }
                 const memberData = result.find(item => item.name === "Team Members");
                 if (memberData) {
-                    setMember(memberData); // Set the found object into the 'process' state variable
+                    setMember(memberData); 
                 }
                 const testimonialData = result.find(item => item.name === "Testimonials Section");
                 if (testimonialData) {
-                    setTestimonial(testimonialData); // Set the found object into the 'process' state variable
+                    setTestimonial(testimonialData); 
                 }
             } catch (err) {
                 setError('Failed to load data');
@@ -137,7 +138,7 @@ console.log('error', error)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-service');
+                const response = await fetch( `${BASE_URL}/custom/v1/custom_processes`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -151,7 +152,7 @@ console.log('error', error)
 
         const fetchTeamData = async () => {
             try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/team-member-api');
+                const response = await fetch( `${BASE_URL}/custom/v1/team-member-api`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -165,7 +166,7 @@ console.log('error', error)
 
         const fetchTestiData = async () => {
             try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/testimonial-api');
+                const response = await fetch( `${BASE_URL}/custom/v1/testimonial-api`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -178,7 +179,7 @@ console.log('error', error)
         };
         const fetchInfoData = async () => {
             try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/info');
+                const response = await fetch( `${BASE_URL}/dynamic-api/v1/info`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -297,7 +298,7 @@ console.log('error', error)
                             <div className="section-heading text-center">
                                 <span className="bg-text">Studio</span>
                                 <h4 className="sub-heading" data-text-animation="fade-in" data-duration="1.5">
-                                    {process && process.title}
+                                    {processes && processes.title}
                                 </h4>
                                 <h2
                                     className="section-title overflow-hidden active"
@@ -307,7 +308,7 @@ console.log('error', error)
                                     style={{ opacity: 1 }}
                                 >
                                     <div className="line" style={{ display: 'block', textAlign: 'center', width: '100%' }}>
-                                        {process && process.subtitle ? splitTextMulti(process.subtitle) : null} {/* Dynamically render subtitle here */}
+                                        {processes && processes.subtitle ? splitTextMulti(processes.subtitle) : null} {/* Dynamically render subtitle here */}
                                     </div>
                                 </h2>
                                 {/* <h2
@@ -653,8 +654,8 @@ console.log('error', error)
                             <div className="row gy-lg-0 gy-5">
                                 {
                                     team && team.length > 0 ? (
-                                        team.map((item, index) => <div key={index} className="col-lg-3 col-md-6">
-                                            <div  className="team-item fade-top">
+                                        team.map((item, index) => <div className="col-lg-3 col-md-6">
+                                            <div key={index} className="team-item fade-top">
                                                 <div className="team-thumb">
                                                     <div className="gradient-color"></div>
                                                     <img src={item && item.image} alt="team" />

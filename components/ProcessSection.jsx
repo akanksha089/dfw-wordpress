@@ -3,15 +3,16 @@ import { useEffect, useState } from 'react';
 import ReactHtmlParser from 'html-react-parser';
 import Image from 'next/image';
 
-const ProcessSection = ({ process }) => {
+const ProcessSection = ({ processes }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://dfweb-v2.onrender.com/api/v1/process-api');
+        const response = await fetch(`${BASE_URL}/custom/v1/process-api`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -55,7 +56,7 @@ const ProcessSection = ({ process }) => {
       <div className="container">
         <div className="section-heading text-center">
           <h4 className="sub-heading custom-heading" data-text-animation="fade-in" data-duration="1.5">
-            {process && process.title}
+            {processes && processes.title}
           </h4>
           <h2
             className="section-title overflow-hidden active"
@@ -65,7 +66,7 @@ const ProcessSection = ({ process }) => {
             style={{ opacity: 1 }}
           >
             <div className="line" style={{ display: 'block', textAlign: 'center', width: '100%' }}>
-              {splitText(process && process.subtitle)} {/* Dynamically render subtitle here */}
+              {splitText(processes && processes.subtitle)} {/* Dynamically render subtitle here */}
             </div>
           </h2>
 

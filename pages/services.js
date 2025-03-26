@@ -13,16 +13,16 @@ import { fetchContactData } from '../lib/api';
 function Service() {
     const [data, setData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    console.log('error', error)
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
    useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await fetchContactData();
                 setData(result); // Set the fetched data       
             } catch (err) {
-               setError('Failed to load data');
+                setError('Failed to load data');
                 console.error('Error fetching data:', err);
             }
         };
@@ -32,17 +32,16 @@ function Service() {
     useEffect(() => {
         const serviceFetchData = async () => {
             try {
-                // const response = await fetch('http://dfw.local/wp-json/custom/v1/services/');
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-services');
+                const response = await fetch( `${BASE_URL}/custom/v1/services/`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
                 setServiceData(result);
             } catch (error) {
-              setError(error);
+                setError(error);
             } finally {
-                // setLoading(false);
+                setLoading(false);
             }
         };
  serviceFetchData();

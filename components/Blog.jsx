@@ -35,7 +35,7 @@ const Blog = ({ blog }) => {
     let line = [];
     const result = [];
 
-    words.forEach((word) => {
+    words.forEach((word, index) => {
       // Push the word to the current line
       line.push(word);
 
@@ -90,7 +90,7 @@ const Blog = ({ blog }) => {
         </div>
         <div className="row gy-lg-0 gy-4">
 
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <div className="col-md-6" key={post.id}>
               <div className="post-card-2 fade-top">
                 <div className="overlay"></div>
