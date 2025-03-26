@@ -9,7 +9,7 @@ import Sidebar from '../../components/Sidebar';
 export default function Post({ post, posts }) {
     const [settingdata, setsettingData] = useState(null);
   const backgroundStyle = {
-    backgroundImage: `url(${post.content.rendered.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
+    backgroundImage: `url(${post?.content?.rendered?.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
