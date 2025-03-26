@@ -654,8 +654,8 @@ function About() {
                             <div className="row gy-lg-0 gy-5">
                                 {
                                     team && team.length > 0 ? (
-                                        team.map((item, index) => <div className="col-lg-3 col-md-6">
-                                            <div key={index} className="team-item fade-top">
+                                        team.map((item, index) => <div key={index} className="col-lg-3 col-md-6">
+                                            <div  className="team-item fade-top">
                                                 <div className="team-thumb">
                                                     <div className="gradient-color"></div>
                                                     <img src={item && item.image} alt="team" />
