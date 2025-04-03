@@ -67,7 +67,7 @@ export default function Header() {
 
     // Reorder the menu items to the desired order: Home, About, Services, Blog, Contact
     const reorderMenuItems = (items) => {
-      const desiredOrder = ['Home', 'About', 'Services', 'Blog', 'Contact'];
+      const desiredOrder = ['Home', 'About', 'Services', 'Staff Augmentation', 'Blog', 'Contact'];
   
       // Find the items that match the desired order
       const orderedItems = desiredOrder
