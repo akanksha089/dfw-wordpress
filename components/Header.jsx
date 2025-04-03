@@ -9,7 +9,7 @@ export default function Header() {
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar visibility
   const router = useRouter();
-  // const isHomePage = router.pathname === '/';
+ const isHomePage = router.pathname === '/';
   const [menuItems, setMenuItems] = useState([]); // Menu data state
   const [serviceData, setServiceData] = useState([]); // Service data state
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
@@ -101,7 +101,7 @@ export default function Header() {
 
   return (
     <>
-      {/* <header className={`header inner-header sticky-active ${isHomePage ? 'header-light' : 'header-dark'}`}> */}
+ {/* <header className={`header inner-header sticky-active ${isHomePage ? 'header-light' : 'header-dark'}`}>  */}
       <header className="header inner-header sticky-active header-dark">
         <div className="primary-header">
           <div className="primary-header-inner">
@@ -113,7 +113,7 @@ export default function Header() {
             <div className="header-right-wrap">
               <div className="header-menu-wrap">
                 <div className="mobile-menu-items">
-                <ul>
+                <ul >
                     {/* Render menu items */}
                     {menuItems.map((item, index) => (
                       <li
@@ -125,9 +125,9 @@ export default function Header() {
 
                         {/* Render subtitles dynamically for "Services" */}
                         {item.title === 'Services' && item.subtitles && item.subtitles.length > 0 && (
-                          <ul>
+                          <ul >
                             {item.subtitles.map((subtitle, subIndex) => (
-                              <li key={subIndex}>
+                              <li  key={subIndex}>
                                 {/* Use Link correctly for service submenu items */}
                                 <Link href={`/service/${subtitle.slug}`}>{subtitle.title}</Link>
                               </li>

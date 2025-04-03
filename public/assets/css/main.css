@@ -15417,7 +15417,7 @@ START: Footer CSS
   color: var(--rr-color-text-body);
 }
 [data-theme=light] .slider-tab-wrap .swiper-slide .slider-tab-btn {
-  color: var(--rr-color-common-white);
+  /* color: var(--rr-color-common-white); */
 }
 [data-theme=light] .slider-tab-wrap .swiper-slide.swiper-slide-thumb-active .slider-tab-btn {
   color: var(--rr-color-heading-primary);

@@ -2,7 +2,11 @@ body {
     background-color: #ffffff ;
     color: #74787C;
   }
-  
+  [data-theme=light] .header .primary-header-inner .header-menu-wrap ul li ul li a {
+    /* background-color: var(--rr-color-common-white); */
+    background-color: black;
+    color: #ffffff;
+  }
    .header.fixed {
     background-color: var(--rr-color-common-white);
     border-bottom: 1px solid #efefef;
