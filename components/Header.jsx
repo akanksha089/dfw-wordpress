@@ -115,13 +115,13 @@ export default function Header() {
                 <div className="mobile-menu-items">
                 <ul >
                     {/* Render menu items */}
-                    {menuItems.map((item, index) => (
+                    {menuItems.map((item, index) => ( 
                       <li
                         key={index}
-                        className={`menu-item ${item.title === 'Services' ? 'menu-item-has-children' : ''}`}
+                        className={`menu-item ${item.title === 'Services'  ? 'menu-item-has-children' : ''}`}
                       >
                         {/* Use Link correctly for main menu items */}
-                        <Link href={item.url}>{item.title}</Link>
+                        <Link href={item.url}>{item.title}</Link> 
 
                         {/* Render subtitles dynamically for "Services" */}
                         {item.title === 'Services' && item.subtitles && item.subtitles.length > 0 && (

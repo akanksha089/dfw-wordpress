@@ -100,6 +100,33 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Component {...pageProps} />
+         {/* Floating WhatsApp Button */}
+         <a
+        href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20services"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          backgroundColor: '#25d366',
+          color: '#fff',
+          borderRadius: '50%',
+          width: '60px',
+          height: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+          zIndex: 1000,
+        }}
+      >
+          <img
+          src="https://img.icons8.com/ios-filled/512/ffffff/whatsapp.png"
+          alt="WhatsApp"
+          style={{ width: '30px', height: '30px' }}
+        />
+      </a>
     </>
   );
 }
