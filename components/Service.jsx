@@ -149,23 +149,75 @@ function Service({ service }) {
                                             aria-labelledby={`heading-${index}`}
                                             data-bs-parent="#projectAccordion"
                                         >
-                                            <div className="accordion-body">
-                                                <div className="hover-content">
-                                                    <div className="content-left">
-                                                        <p>
+                                            <div
+                                                className="accordion-body"
+                                                style={{
+                                                    display: 'block',
+                                                    visibility: 'visible',
+                                                    opacity: 1,
+                                                    overflow: 'visible',
+                                                }}
+                                            >
+                                                <div
+                                                    className="hover-content"
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'start',
+                                                        justifyContent: 'space-between',
+                                                        flexWrap: 'wrap',
+                                                        rowGap: '20px',
+                                                    }}
+                                                >
+                                                    <div className="content-left" style={{ flex: 1, minWidth: '250px' }}>
+                                                        <p style={{ marginBottom: '30px' ,  maxWidth: '560px' , width: '100%'}}>
                                                             Conubia elementum sodales molestie tempus gravida massa porta. Iaculis gravida feugiat tempor nulla orci imperdiet at aenean
                                                         </p>
-                                                        <a href={`/service/${item.slug}`} className="rr-primary-btn">
-                                                            View Details<i className="fa-regular fa-arrow-right"></i>
+                                                        <a
+                                                            href={`/service/${item.slug}`}
+                                                            className="rr-primary-btn"
+                                                            style={{
+                                                                backgroundColor: 'var(--rr-color-theme-primary)',
+                                                                fontFamily: 'var(--rr-ff-heading)',
+                                                                color: 'var(--rr-color-common-white)',
+                                                                display: 'inline-flex',
+                                                                alignItems: 'center',
+                                                                fontSize: '16px',
+                                                                fontWeight: 600,
+                                                                lineHeight: 1,
+                                                                padding: '22px 30px',
+                                                                borderRadius: 0,
+                                                                transition: 'all 0.3s ease-in-out',
+                                                                textTransform: 'capitalize',
+                                                                position: 'relative',
+                                                                zIndex: 1,
+                                                                textDecoration: 'none',
+                                                                gap: '8px',
+                                                              }}
+                                                        >
+                                                            View Details
+                                                            <i className="fa-regular fa-arrow-right"></i>
                                                         </a>
                                                     </div>
-                                                    <div className="content-right">
-                                                        <div className="project-thumb">
-                                                            <img src="assets/img/project/project-1.png" alt="" />
+                                                    <div className="content-right" style={{     marginTop: '-100px',}}>
+                                                        <div className="project-thumb" style={{    maxWidth: '600px',
+                                                             width: '100%',
+                                                             height: '300px',
+                                                             position: 'absolute',
+                                                             top: '40px',
+                                                             right: '0'
+                                                        }}>
+                                                            <img
+                                                                src="assets/img/project/project-1.png"
+                                                                alt="Project"
+                                                                style={{
+                                                                    maxWidth: '100%'    
+                                                                }}
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 ))
