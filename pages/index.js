@@ -10,6 +10,7 @@ import Counter from '../components/Counter';
 import Carousal from '../components/Carousal';
 import FAQSection from '../components/Faq';
 import Blog from '../components/Blog';
+import Quote from '../components/Quote';
 import { fetchCustomApiData, fetchContactData } from '../lib/api';
 
 export default function Home() {
@@ -90,6 +91,7 @@ export default function Home() {
           <Carousal />
           <FAQSection faq = {faq} />
           <Blog blog = {blog} />
+          <Quote/>
           <Footer data = {settingdata} />
         </div>
       </div>

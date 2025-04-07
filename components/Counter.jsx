@@ -159,7 +159,7 @@ const Counter = ({ growth }) => {
                 </div>
               </h2>
             </div>
-            <a href="contact.html" className="rr-primary-btn">
+            <a href="/contact" className="rr-primary-btn">
               Get a Quote
             </a>
           </div>
