@@ -58,12 +58,25 @@ const Hero = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch hero sliders');
         }
-        const data = await response.json();
+    
+      const rawText = await response.text();
+      const match = rawText.match(/\[\s*{[\s\S]*}\s*\]/); // match JSON array containing objects
+      if (!match) {
+        throw new Error('Valid JSON array not found in response');
+      }
+  
+      let jsonText = match[0];
+     // Optional: clean up known issues
+     jsonText = jsonText.replace(/&#038;/g, '&');
+     jsonText = jsonText.replace(/\\\//g, '/');
+        const data = JSON.parse(jsonText);
         setSliders(data);
       } catch (error) {
         console.error('Error fetching hero slider:', error);
       }
     };
+    
+    
 
     fetchSliders();
   }, []);

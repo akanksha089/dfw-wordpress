@@ -6,6 +6,7 @@ const Odometer = dynamic(() => import('odometer'), { ssr: false });
 
 const Counter = ({ growth }) => {
   const [isClient, setIsClient] = useState(false);
+    const [count, setCount] = useState([]);
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const splitText = (text) => {
     if (!text) return null;
@@ -60,16 +61,39 @@ const Counter = ({ growth }) => {
     setIsClient(true);
   }, []);
   // Fetch counter data from the API
-  useEffect(() => {
-    fetch(`${BASE_URL}/count-api/v1/data`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCounterData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching counter data:', error);
-      });
-  }, []);
+
+
+    useEffect(() => {
+      const fetchCount = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/count-api/v1/data`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch hero Count');
+          }
+      
+          const rawText = await response.text();
+    // Match the first full JSON array in the response (even with newlines)
+    const match = rawText.match(/\[\s*{[\s\S]*?}\s*\]/);
+
+    if (!match) {
+      throw new Error('Valid JSON array not found in response');
+    }
+
+    let jsonText = match[0];
+       jsonText = jsonText.replace(/&#038;/g, '&'); // replace HTML entity
+       jsonText = jsonText.replace(/\\\//g, '/');   // replace escaped slashes
+       jsonText = jsonText.replace(/\\r\\n/g, ' '); // optional cleanup of line breaks
+          const data = JSON.parse(jsonText);
+          setCount(data);
+        } catch (error) {
+          console.error('Error fetching counter:', error);
+        }
+      };
+      
+      
+  
+      fetchCount();
+    }, []);
 
   useEffect(() => {
     if (isClient && counterData.length > 0) {
@@ -210,7 +234,7 @@ const Counter = ({ growth }) => {
 
 <div className="container">
       <div className="row gy-lg-0 gy-4">
-        {counterData.map((item, index) => (
+        {count.map((item, index) => (
           <div key={index} className="col-lg-3 col-md-6">
             <div className="counter-item">
               <h3 className="title">
