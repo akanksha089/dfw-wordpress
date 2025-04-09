@@ -6,7 +6,7 @@ import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ReactHtmlParser from 'html-react-parser';
+// import ReactHtmlParser from 'html-react-parser';
 import { fetchContactData } from '../../lib/api';
 
 
@@ -69,7 +69,7 @@ const ServiceDetails = () => {
                 setSettingData(result); // Set the fetched data       
             } catch (err) {
                 setError('Failed to load data');
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error, err);
             }
         };
 
@@ -78,9 +78,7 @@ const ServiceDetails = () => {
 
 
     console.log('serviceData', serviceData)
-    const content = data && data.content
-        ? data.content
-        : '';
+    // const content = data && data.content ? data.content : '';
     const meta_title = data?.blog?.meta_title || '';
     const meta_description = data?.blog?.meta_description || '';
     const meta_keyword = data?.blog?.meta_keyword || '';
