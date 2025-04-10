@@ -6,7 +6,7 @@ import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ReactHtmlParser from 'html-react-parser';
+// import ReactHtmlParser from 'html-react-parser';
 import { fetchContactData } from '../lib/api';
 
 
