@@ -221,9 +221,9 @@ const ServiceDetails = () => {
                                                     >
                                                         We’ve amazing  {data && data.title ? data.title : ""} Services
                                                     </h2>
-                                                    <a href="/service" className="rr-primary-btn">
+                                                    <Link href="/service" className="rr-primary-btn">
                                                         More Services <i className="fa-sharp fa-regular fa-arrow-right"></i>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,7 +238,7 @@ const ServiceDetails = () => {
                                                     </svg>
                                                 </div>
                                                 <h3 className="title">
-                                                    <a >{service.title}</a>
+                                                   {service.title}
                                                 </h3>
                                                 <div >
                                                 <p>
