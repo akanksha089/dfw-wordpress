@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Link from 'next/link';
+// import { useState } from 'react';
+// import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Blog = () => {
+// const Blog = () => {
   const router = useRouter();
   const { slug } = router.query;
 
-  // Static data for blog posts
+
   const posts = [
     {
       id: 1,
