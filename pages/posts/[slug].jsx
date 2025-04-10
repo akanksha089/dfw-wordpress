@@ -119,35 +119,78 @@ export default function Post({ post, posts }) {
 }
 
 // Fetch all paths for static generation
+// export async function getStaticPaths() {
+//   // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+//   const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34'; // Replace with your mock API URL
+//   const res = await fetch(`${MOCK_API_URL}?page=${page}&per_page=${perPage}`);
+//   const posts = await res.json();
+
+//   const paths = posts.map(post => ({
+//     params: { slug: post.slug }, // Extract slugs
+//   }));
+
+//   return {
+//     paths,
+//     fallback: true, // Dynamically handle paths not pre-rendered
+//   };
+// }
+
+// // Fetch specific post and all posts for the sidebar
+// export async function getStaticProps({ params }) {
+//   // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+//   const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34';
+//   const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
+//   const res = await fetch( `${MOCK_API_URL}?page=${page}&per_page=${perPage}`); // Fetch all posts
+//   const posts = await res.json();
+
+//   return {
+//     props: {
+//       post: post || null, // Return null if no post found
+//       posts: posts || [], // Return an empty array if no posts found
+//     },
+//     revalidate: 10, // Revalidate the page every 10 seconds
+//   };
+// }
+
+
+
+// Fetch all posts and generate static paths
 export async function getStaticPaths() {
-  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34'; // Replace with your mock API URL
-  const res = await fetch(`${MOCK_API_URL}?page=${page}&per_page=${perPage}`);
+  const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34'; // Your mock API URL
+
+  // Fetch all posts
+  const res = await fetch(MOCK_API_URL);
   const posts = await res.json();
 
+  // Generate paths from slugs
   const paths = posts.map(post => ({
     params: { slug: post.slug }, // Extract slugs
   }));
 
   return {
     paths,
-    fallback: true, // Dynamically handle paths not pre-rendered
+    fallback: false, // All paths are pre-rendered, no fallback required
   };
 }
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
-  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34';
-  const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
-  const res = await fetch( `${MOCK_API_URL}?page=${page}&per_page=${perPage}`); // Fetch all posts
-  const posts = await res.json();
+  const MOCK_API_URL = 'https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34'; // Your mock API URL
+
+  // Fetch the specific post by its slug
+  const postRes = await fetch(`${MOCK_API_URL}`);
+  const posts = await postRes.json();
+  const post = posts.find(p => p.slug === params.slug) || null; // Find the post by slug
+
+  // Fetch all posts for sidebar (you can modify the number of posts per page)
+  const allPosts = posts.slice(0, 5); // For example, fetch the first 5 posts for the sidebar
 
   return {
     props: {
       post: post || null, // Return null if no post found
-      posts: posts || [], // Return an empty array if no posts found
+      posts: allPosts || [], // Return the fetched posts
     },
-    revalidate: 10, // Revalidate the page every 10 seconds
+    revalidate: 10, // Revalidate the page every 10 seconds (optional)
   };
 }
+
