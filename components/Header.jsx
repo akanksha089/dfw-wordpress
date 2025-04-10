@@ -129,7 +129,7 @@ export default function Header() {
                             {item.subtitles.map((subtitle, subIndex) => (
                               <li  key={subIndex}>
                                 {/* Use Link correctly for service submenu items */}
-                                <Link href={`/service/${subtitle.slug}`}>{subtitle.title}</Link>
+                                <Link href={`/${subtitle.slug}`}>{subtitle.title}</Link>
                               </li>
                             ))}
                           </ul>

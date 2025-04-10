@@ -173,7 +173,8 @@ function Service({ service }) {
                                                             Conubia elementum sodales molestie tempus gravida massa porta. Iaculis gravida feugiat tempor nulla orci imperdiet at aenean
                                                         </p>
                                                         <a
-                                                            href={`/service/${item.slug}`}
+                                                            // href={`/service/${item.slug}`}
+                                                            href={`/${item.slug}`}
                                                             className="rr-primary-btn"
                                                             style={{
                                                                 backgroundColor: 'var(--rr-color-theme-primary)',
