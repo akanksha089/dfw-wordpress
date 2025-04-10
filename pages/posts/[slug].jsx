@@ -120,8 +120,8 @@ export default function Post({ post, posts }) {
 
 // Fetch all paths for static generation
 export async function getStaticPaths() {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const res = await fetch( `${BASE_URL}/wp/v2/posts`);
+  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const res = await fetch( `https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34/wp/v2/posts`);
   const posts = await res.json();
 
   const paths = posts.map(post => ({
@@ -136,9 +136,9 @@ export async function getStaticPaths() {
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
-  const res = await fetch( `${BASE_URL}/wp/v2/posts`); // Fetch all posts
+  const res = await fetch( `https://www.mocky.io/v2/5e8a8eac2f0000b031a0fb34/wp/v2/posts`); // Fetch all posts
   const posts = await res.json();
 
   return {
