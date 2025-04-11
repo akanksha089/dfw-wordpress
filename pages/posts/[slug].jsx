@@ -1,72 +1,149 @@
-// import { useState } from 'react';
-// import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { fetchPostBySlug } from '../../lib/api';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import ReactHtmlParser from 'html-react-parser';
+import {  fetchContactData } from '../../lib/api';
+import Sidebar from '../../components/Sidebar';
+export default function Post({ post, posts }) {
+    const [settingdata, setsettingData] = useState(null);
+  const backgroundStyle = {
+    backgroundImage: `url(${post.content.rendered.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  };
+  // Check if the post is found, otherwise show a "not found" message
+  if (!post) {
+    return <div>Post not found!</div>;
+  }
 
-// const Blog = () => {
-  const router = useRouter();
-  const { slug } = router.query;
 
-
-  const posts = [
-    {
-      id: 1,
-      slug: 'the-first-post',
-      title: 'The First Post',
-      content: 'This is the content of the first post. It can be a lengthy content for demonstration purposes.',
-      date: '2025-01-01',
-      excerpt: 'This is the excerpt for the first post.',
-    },
-    {
-      id: 2,
-      slug: 'the-second-post',
-      title: 'The Second Post',
-      content: 'This is the content of the second post. Here, you can write another interesting blog post.',
-      date: '2025-01-02',
-      excerpt: 'This is the excerpt for the second post.',
-    },
-    {
-      id: 3,
-      slug: 'the-third-post',
-      title: 'The Third Post',
-      content: 'This is the content of the third post. More interesting content for your readers!',
-      date: '2025-01-03',
-      excerpt: 'This is the excerpt for the third post.',
-    },
-    // Add more posts as needed
-  ];
-
-  // Find the selected post based on the slug
-  const post = posts.find(p => p.slug === slug);
-
+    useEffect(() => {
+           const fetchData = async () => {
+               try {
+                   const result = await fetchContactData();
+                   setsettingData(result); // Set the fetched data       
+               } catch (err) {
+                   console.error('Error fetching data:', err);
+               }
+           };
+   
+           fetchData();
+       }, []);
   return (
-    <div>
-      <h1>Blog Posts</h1>
-
-      {/* Show list of posts if no slug is selected */}
-      {!slug ? (
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link href={`/blog?slug=${post.slug}`} passHref>
-                <a>
-                  <h2>{post.title}</h2>
-                  <p>{post.excerpt}</p>
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        // Show individual post if slug is available
-        <div>
-          <button onClick={() => router.push('/blog')}>Back to List</button>
-          <h1>{post?.title}</h1>
-          <p>{post?.date}</p>
-          <div>{post?.content}</div>
+    <div className="body">
+      <Header />
+              <Sidebar data={settingdata}/>
+      <div id="popup-search-box">
+        <div className="box-inner-wrap d-flex align-items-center">
+          <form id="form" action="#" method="get" role="search">
+            <input id="popup-search" type="text" name="s" placeholder="Type keywords here..." />
+          </form>
+          <div className="search-close">
+            <i className="fa-sharp fa-regular fa-xmark"></i>
+          </div>
         </div>
-      )}
+      </div>
+
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <section className="page-header" style={backgroundStyle}>
+            <div className="overlay"></div>
+            <div className="shapes">
+              <div className="shape shape-1">
+                <img src="/assets/img/shapes/page-header-shape-1.png" alt="shape" />
+              </div>
+              <div className="shape shape-2">
+                <img src="/assets/img/shapes/page-header-shape-2.png" alt="shape" />
+              </div>
+              <div className="shape shape-3">
+                <img src="/assets/img/shapes/page-header-shape-3.png" alt="shape" />
+              </div>
+            </div>
+            <div className="container">
+              <div className="page-header-content text-center">
+                <h1 className="title text-white">{post.title.rendered}</h1>
+                <h4 className="sub-title">
+                  <Link href="/">Home</Link> <span>/</span> 
+                  <Link href="/blog">Blog</Link> <span>/</span> 
+                  <Link href={`/posts/${post.slug}`}>{post.title.rendered}</Link>
+                </h4>
+              </div>
+            </div>
+          </section>
+
+          <section className="service-details pt-130 pb-130">
+            <div className="container">
+              <div className="row gy-lg-0 gy-5">
+                {/* Post Content */}
+                <div className="col-lg-8 col-md-12">
+                  <div className="sidebar-content-wrap">
+                    <div className="service-details-content">
+                      <h2 className="title custom-heading">{post.title.rendered}</h2>
+                      <div className="mb-30">{ReactHtmlParser(post.content.rendered)}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sidebar with Blog Links */}
+                <div className="col-lg-4 col-md-12">
+                  <div className="service-widget">
+                    <h3 className="widget-title custom-heading">Blogs</h3>
+                    <ul className="category-list">
+                      {posts.map((blogPost, index) => (
+                        <li key={index} className={post.slug === blogPost.slug ? "active" : ""}>
+                          <Link href={`/posts/${blogPost.slug}`}>
+                            <i className="fa-sharp fa-regular fa-arrow-right"></i>
+                            {blogPost.title.rendered}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <Footer data={settingdata}/>
+        </div>
+      </div>
+
+      <div id="scroll-percentage">
+        <span id="scroll-percentage-value"></span>
+      </div>
     </div>
   );
-};
+}
 
-export default Blog;
+// Fetch all paths for static generation
+export async function getStaticPaths() {
+  const res = await fetch('http://dfw.local/wp-json/wp/v2/posts');
+  const posts = await res.json();
+
+  const paths = posts.map(post => ({
+    params: { slug: post.slug }, // Extract slugs
+  }));
+
+  return {
+    paths,
+    fallback: true, // Dynamically handle paths not pre-rendered
+  };
+}
+
+// Fetch specific post and all posts for the sidebar
+export async function getStaticProps({ params }) {
+  const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
+  const res = await fetch('http://dfw.local/wp-json/wp/v2/posts'); // Fetch all posts
+  const posts = await res.json();
+
+  return {
+    props: {
+      post: post || null, // Return null if no post found
+      posts: posts || [], // Return an empty array if no posts found
+    },
+    revalidate: 10, // Revalidate the page every 10 seconds
+  };
+}
