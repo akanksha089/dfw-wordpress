@@ -25,7 +25,9 @@ export default function Post({ post, posts }) {
   }
   // Check if the post is found, otherwise show a "not found" message
   if (!post || !post.content) {
-    return <div>Post not found!</div>;
+    return {
+      notFound: true, // Let Next.js show 404
+    };
   }
 
 
@@ -156,6 +158,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
+  
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
   try {
     const post = await fetchPostBySlug(params.slug);
