@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { fetchPostBySlug } from '../../lib/api';
+// import { fetchPostBySlug } from '../../lib/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ReactHtmlParser from 'html-react-parser';
@@ -16,7 +16,7 @@ export default function Post({ post, posts }) {
   };
   // Check if the post is found, otherwise show a "not found" message
   if (!post || !post.content) {
-    return <div>Post not found!</div>;
+    return { notFound: true };
   }
 
     useEffect(() => {
