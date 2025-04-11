@@ -147,21 +147,19 @@ export async function getStaticProps({ params }) {
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   try {
-    const post = await fetchPostBySlug(params.slug);
-
+    const res = await fetch(`${BASE_URL}/wp/v2/posts?slug=${params.slug}`);
+    const data = await res.json();
+    const post = Array.isArray(data) && data.length > 0 ? data[0] : null;
     if (!post || !post.content) {
-      return {
-        notFound: true,
-      };
-    }   
-
-    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
-    const posts = await res.json();
-
+      console.warn("❌ No post found for slug:", params.slug);
+      return { notFound: true };
+    }
+    const allPostsRes = await fetch(`${BASE_URL}/wp/v2/posts`);
+    const allPosts = await allPostsRes.json();
     return {
       props: {
         post,
-        posts: Array.isArray(posts) ? posts : [],
+        posts: Array.isArray(allPosts) ? allPosts : [],
       },
       revalidate: 10,
     };
