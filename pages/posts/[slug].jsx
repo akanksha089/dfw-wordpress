@@ -15,10 +15,9 @@ export default function Post({ post, posts }) {
     backgroundRepeat: 'no-repeat',
   };
   // Check if the post is found, otherwise show a "not found" message
-  if (!post) {
+  if (!post || !post.content) {
     return <div>Post not found!</div>;
   }
-
 
     useEffect(() => {
            const fetchData = async () => {
@@ -137,15 +136,27 @@ export async function getStaticPaths() {
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
-  const res = await fetch(`${BASE_URL}/wp/v2/posts`); // Fetch all posts
-  const posts = await res.json();
 
-  return {
-    props: {
-      post: post || null, // Return null if no post found
-      posts: posts || [], // Return an empty array if no posts found
-    },
-    revalidate: 10, // Revalidate the page every 10 seconds
-  };
+  try {
+    const post = await fetchPostBySlug(params.slug);
+
+    if (!post || !post.content || !post.content.rendered) {
+      return { notFound: true }; // 🔥 Prevents build-time crashes
+    }
+
+    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
+    const posts = await res.json();
+
+    return {
+      props: {
+        post,
+        posts: Array.isArray(posts) ? posts : [],
+      },
+      revalidate: 10,
+    };
+  } catch (err) {
+    console.error("Error in getStaticProps:", err);
+    return { notFound: true };
+  }
 }
+
