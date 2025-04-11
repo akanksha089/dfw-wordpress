@@ -129,10 +129,10 @@ export default function Post({ post, posts }) {
 
 // Fetch all paths for static generation
 export async function getStaticPaths() {
-  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
 
   try {
-    const res = await fetch("http://dfwebsolutions.com:8080/wp-json/wp-json/wp/v2/posts");
+    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
     const data = await res.json();
 
     if (!Array.isArray(data)) {
@@ -156,10 +156,10 @@ export async function getStaticPaths() {
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
-  // const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
   try {
     const post = await fetchPostBySlug(params.slug);
-    const res = await fetch("http://dfwebsolutions.com:8080/wp-json/wp-json/wp/v2/posts");
+    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
     const posts = await res.json();
 
     if (!post || post.length === 0) {
