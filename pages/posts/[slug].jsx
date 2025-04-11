@@ -140,9 +140,11 @@ export async function getStaticProps({ params }) {
   try {
     const post = await fetchPostBySlug(params.slug);
 
-    if (!post || !post.content || !post.content.rendered) {
-      return { notFound: true }; // 🔥 Prevents build-time crashes
-    }
+    if (!post || !post.content) {
+      return {
+        notFound: true,
+      };
+    } 
 
     const res = await fetch(`${BASE_URL}/wp/v2/posts`);
     const posts = await res.json();
