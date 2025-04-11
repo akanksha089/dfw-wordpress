@@ -6,28 +6,17 @@ import Footer from '../../components/Footer';
 import ReactHtmlParser from 'html-react-parser';
 import {  fetchContactData } from '../../lib/api';
 import Sidebar from '../../components/Sidebar';
-import { useRouter } from 'next/router';
-
 export default function Post({ post, posts }) {
     const [settingdata, setsettingData] = useState(null);
-    const router = useRouter();
-
   const backgroundStyle = {
     backgroundImage: `url(${post.content.rendered.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
   };
-
-  // Show fallback loading state for ISR
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
   // Check if the post is found, otherwise show a "not found" message
-  if (!post || !post.content) {
-    return {
-      notFound: true, // Let Next.js show 404
-    };
+  if (!post) {
+    return <div>Post not found!</div>;
   }
 
 
@@ -103,7 +92,7 @@ export default function Post({ post, posts }) {
                   <div className="service-widget">
                     <h3 className="widget-title custom-heading">Blogs</h3>
                     <ul className="category-list">
-                      {posts?.map((blogPost, index) => (
+                      {posts.map((blogPost, index) => (
                         <li key={index} className={post.slug === blogPost.slug ? "active" : ""}>
                           <Link href={`/posts/${blogPost.slug}`}>
                             <i className="fa-sharp fa-regular fa-arrow-right"></i>
@@ -131,53 +120,32 @@ export default function Post({ post, posts }) {
 
 // Fetch all paths for static generation
 export async function getStaticPaths() {
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const res = await fetch(`${BASE_URL}/wp/v2/posts`);
+  const posts = await res.json();
 
-  try {
-    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
-    const data = await res.json();
+  const paths = posts.map(post => ({
+    params: { slug: post.slug }, // Extract slugs
+  }));
 
-    if (!Array.isArray(data)) {
-      console.error("Unexpected API response:", data);
-      return { paths: [], fallback: true };
-    }
-
-    const paths = data.map(post => ({
-      params: { slug: post.slug },
-    }));
-
-    return {
-      paths,
-      fallback: true, // Enable fallback for ISR
-    };
-  } catch (err) {
-    console.error("Error in getStaticPaths:", err);
-    return { paths: [], fallback: true };
-  }
+  return {
+    paths,
+    fallback: true, // Dynamically handle paths not pre-rendered
+  };
 }
 
 // Fetch specific post and all posts for the sidebar
 export async function getStaticProps({ params }) {
-  
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env
-  try {
-    const post = await fetchPostBySlug(params.slug);
-    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
-    const posts = await res.json();
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const post = await fetchPostBySlug(params.slug); // Fetch single post by slug
+  const res = await fetch(`${BASE_URL}/wp/v2/posts`); // Fetch all posts
+  const posts = await res.json();
 
-    if (!post || post.length === 0) {
-      return { notFound: true };
-    }
-
-    return {
-      props: {
-        post,
-        posts: Array.isArray(posts) ? posts : [],
-      },
-      revalidate: 10, // ISR: Update every 10 seconds
-    };
-  } catch (err) {
-    console.error("Error in getStaticProps:", err);
-    return { notFound: true };
-  }
+  return {
+    props: {
+      post: post || null, // Return null if no post found
+      posts: posts || [], // Return an empty array if no posts found
+    },
+    revalidate: 10, // Revalidate the page every 10 seconds
+  };
 }
