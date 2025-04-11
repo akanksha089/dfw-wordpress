@@ -120,17 +120,26 @@ export default function Post({ post, posts }) {
 // Fetch all paths for static generation
 export async function getStaticPaths() {
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const res = await fetch(`${BASE_URL}/wp/v2/posts`);
-  const posts = await res.json();
 
-  const paths = posts.map(post => ({
-    params: { slug: post.slug }, // Extract slugs
-  }));
+  try {
+    const res = await fetch(`${BASE_URL}/wp/v2/posts`);
+    const posts = await res.json();
 
-  return {
-    paths,
-    fallback: true, // Dynamically handle paths not pre-rendered
-  };
+    const paths = Array.isArray(posts)
+      ? posts.map(post => ({ params: { slug: post.slug } }))
+      : [];
+
+    return {
+      paths,
+      fallback: true, // or 'blocking'
+    };
+  } catch (error) {
+    console.error("Error in getStaticPaths:", error);
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
 }
 
 // Fetch specific post and all posts for the sidebar
@@ -144,7 +153,7 @@ export async function getStaticProps({ params }) {
       return {
         notFound: true,
       };
-    } 
+    }   
 
     const res = await fetch(`${BASE_URL}/wp/v2/posts`);
     const posts = await res.json();
