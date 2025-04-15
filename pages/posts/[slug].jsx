@@ -8,12 +8,20 @@ import {  fetchContactData } from '../../lib/api';
 import Sidebar from '../../components/Sidebar';
 export default function Post({ post, posts }) {
     const [settingdata, setsettingData] = useState(null);
-  const backgroundStyle = {
-    backgroundImage: `url(${post.content.rendered.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-  };
+  // const backgroundStyle = {
+  //   backgroundImage: `url(${post.content.rendered.match(/<img.*?src="(.*?)"/)?.[1] || 'default-image-url.jpg'})`,
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  // };
+
+  const imageMatch = post?.content?.rendered?.match(/<img.*?src="(.*?)"/);
+const backgroundStyle = {
+  backgroundImage: `url(${imageMatch?.[1] || 'default-image-url.jpg'})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+};
 
   if (!post || !post.content) {
     return <div>Post not found!</div>;
