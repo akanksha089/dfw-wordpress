@@ -14,9 +14,9 @@ export default function Post({ post, posts }) {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
   };
-  // Check if the post is found, otherwise show a "not found" message
+
   if (!post || !post.content) {
-    return { notFound: true };
+    return <div>Post not found!</div>;
   }
 
     useEffect(() => {
