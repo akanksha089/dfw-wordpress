@@ -26,7 +26,6 @@ body {
     color: var(--rr-color-theme-primary);
   }
   
-  
   .sidebar-area {
     background-color: var(--rr-color-common-white);
   }
@@ -485,4 +484,47 @@ body {
     color: #3F5AF3;
 }
 
-  
+/* Only layout styles – no colors or fonts overridden */
+.dropdown-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 15px;
+  width: 500px !important;
+  min-width: 300px;
+  position: absolute;
+  z-index: 10;
+  padding: 10px;
+  background-color: unset; /* default for large screens */
+}
+/* Black background only on 1024px and below */
+@media (max-width: 2560px) {
+  .dropdown-grid {
+    background-color: #000 !important; /* or use var(--your-bg-black) if using CSS variables */
+  }
+}
+/* Black background only on 1024px and below */
+@media (max-width: 1440px) {
+  .dropdown-grid {
+    background-color: #000 !important; /* or use var(--your-bg-black) if using CSS variables */
+  }
+}
+@media (max-width: 1024px) {
+  .dropdown-grid {
+    background-color: #000 !important; /* or use var(--your-bg-black) if using CSS variables */
+  }
+}
+/* Responsive: 2 columns on tablets */
+@media (max-width: 768px) {
+  .dropdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: auto;
+  }
+}
+
+/* Responsive: 1 column on mobile */
+@media (max-width: 480px) {
+  .dropdown-grid {
+    grid-template-columns: 1fr;
+    width: auto;
+  }
+}

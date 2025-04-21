@@ -5357,7 +5357,7 @@ START: Process CSS
   grid-template-columns: 80px 1fr;
   grid-gap: 20px;
   padding: 60px 0;
-  border-right: 1px solid var(--rr-color-border-1);
+  /* border-right: 1px solid var(--rr-color-border-1); */
 }
 .process-counter .counter-card.card-4 {
   border-right: none;
@@ -15381,10 +15381,10 @@ START: Footer CSS
   border-bottom: 1px solid #E6E6E6;
 }
 [data-theme=light] .process-counter .counter-card {
-  border-right: 1px solid #E6E6E6;
+  /* border-right: 1px solid #E6E6E6; */
 }
 [data-theme=light] .process-counter .counter-card.card-4 {
-  border-right: none;
+  /* border-right: none; */
 }
 [data-theme=light] .process-counter .counter-card .icon {
   background-color: var(--rr-color-theme-primary);
@@ -15456,7 +15456,7 @@ START: Footer CSS
   border-top: 1px solid #E6E6E6;
 }
 [data-theme=light] .counter-card-2 {
-  border-right: 1px solid #E6E6E6;
+  /* border-right: 1px solid #E6E6E6; */
 }
 [data-theme=light] .service-card-2 {
   background-color: var(--rr-color-common-white);

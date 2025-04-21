@@ -65,7 +65,7 @@ const AboutSection = ({ about }) => {
                 <p>
                 {about && about.description}
                 </p>
-                <a href="about.html" className="rr-primary-btn">
+                <a href="/about" className="rr-primary-btn">
                   Get Started Now
                   <i className="fa-regular fa-arrow-right"></i>
                 </a>
