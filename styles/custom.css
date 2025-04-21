@@ -488,8 +488,9 @@ body {
 .dropdown-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 15px;
-  width: 500px !important;
+  /* gap: 10px; */
+  gap: 5px;
+  width: 520px !important;
   min-width: 300px;
   position: absolute;
   z-index: 10;

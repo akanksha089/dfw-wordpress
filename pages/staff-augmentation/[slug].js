@@ -77,7 +77,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                             {subtitle ? subtitle.title : 'Loading...'} from India for Your Project
                                         </div>
                                     </h2>
-                                    <p className='pt-3'>Hustling over finding a dedicated developer and trying to cope in the market with multi-million dollar companies. Worry no more; you are in the right place. At Octal IT Solution, we are a close-knit team of dedicated developers who serve as catalysts offering a multitude of opportunities and benefits such as budget-friendly service, operational effectiveness, savings on utilities, access to the latest technologies, and market trends. We also deliver transparent, global tech exposure for your existing or new project requirements.</p>
+                                    <p className='pt-3'>Hustling over finding a dedicated developer and trying to cope in the market with multi-million dollar companies. Worry no more; you are in the right place. At Digital Future Web Solutions, we are a close-knit team of dedicated developers who serve as catalysts offering a multitude of opportunities and benefits such as budget-friendly service, operational effectiveness, savings on utilities, access to the latest technologies, and market trends. We also deliver transparent, global tech exposure for your existing or new project requirements.</p>
                                 </div>
                             </div>
                         </div>
@@ -194,8 +194,8 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                     <figure className="business-models-img text-center">
                                                         <img
                                                             alt=""
-                                                            src="https://cdn-gnapb.nitrocdn.com/rVKsFrUUJpBqwSXDQLTtMASMDgzFisXl/assets/images/optimized/rev-b90d1f8/d274cmdd0goq94.cloudfront.net/wp-content/uploads/2024/03/Hire-Full-Time-Developer.png"
-                                                            className="content_img lazyloaded"
+                                                            src="/assets/img/service/service-2.jpg"
+                                                            className="content_img lazyloaded h-[340px]"
                                                         />
                                                     </figure>
                                                 </div>
@@ -228,10 +228,10 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
                                                     <figure className="business-models-img text-center">
-                                                        <img
+                                                    <img
                                                             alt=""
-                                                            src="https://cdn-gnapb.nitrocdn.com/rVKsFrUUJpBqwSXDQLTtMASMDgzFisXl/assets/images/optimized/rev-b90d1f8/d274cmdd0goq94.cloudfront.net/wp-content/uploads/2024/03/Hire-Part-Time-Developer.png"
-                                                            className="content_img lazyloaded"
+                                                            src="/assets/img/service/service-3.jpg"
+                                                            className="content_img lazyloaded h-[340px]"
                                                         />
                                                     </figure>
                                                 </div>
@@ -264,10 +264,10 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
                                                     <figure className="business-models-img text-center">
-                                                        <img
+                                                    <img
                                                             alt=""
-                                                            src="https://cdn-gnapb.nitrocdn.com/rVKsFrUUJpBqwSXDQLTtMASMDgzFisXl/assets/images/optimized/rev-b90d1f8/d274cmdd0goq94.cloudfront.net/wp-content/uploads/2024/03/Hourly-Based-Hiring.png"
-                                                            className="content_img lazyloaded"
+                                                            src="/assets/img/service/service-4.jpg"
+                                                            className="content_img lazyloaded h-[340px]"
                                                         />
                                                     </figure>
                                                 </div>

@@ -141,7 +141,8 @@ export default function Header() {
                         )}
 
                         {hasDropdown && (
-                          <ul className={`${item.title === 'Staff Augmentation' ? 'dropdown-grid' : ''}`}>
+                       <ul className={`${(item.title === 'Staff Augmentation' || item.title === 'Services') ? 'dropdown-grid' : ''}`}>
+                        
                             {item.subtitles.map((sub, subIndex) => (
                               <li key={subIndex}>
                                 {item.title === 'Staff Augmentation' ? (
