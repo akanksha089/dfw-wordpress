@@ -11,17 +11,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
     const [settingdata, setsettingData] = useState(null);
     const [activeTab, setActiveTab] = useState(0);
 
-    // Step 2: Handle tab click to change active tab
-    const handleTabClick = (tabIndex) => {
-        setActiveTab(tabIndex);
-    };
-    const router = useRouter();
-    const { slug } = router.query; // Get the slug from the URL
 
-    // If the slug is not yet available, show a loading state
-    if (!slug) {
-        return <div>Loading...</div>;
-    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -34,6 +24,18 @@ const StaffAugmentationPage = ({ subtitle }) => {
 
         fetchData();
     }, []);
+    // Step 2: Handle tab click to change active tab
+    const handleTabClick = (tabIndex) => {
+        setActiveTab(tabIndex);
+    };
+    const router = useRouter();
+    const { slug } = router.query; // Get the slug from the URL
+
+    // If the slug is not yet available, show a loading state
+    if (!slug) {
+        return <div>Loading...</div>;
+    }
+   
     return (
         <div className="body">
             <Header />
