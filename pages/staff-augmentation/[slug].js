@@ -184,10 +184,10 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                             <li><b>Communication -</b> E-mail, Skype, Slack, Business Communication Tools</li>
                                                         </ul>
                                                         {/* <a href="/contanct" className="btn_primary">Talk to Consultant</a> */}
-                                                        <a href="/contanct" className="rr-primary-btn">
+                                                        <Link href="/contact" className="rr-primary-btn">
                                                         Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
-                                                        </a>
+                                                        </Link>
                                                     </article>
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
@@ -220,10 +220,10 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                             <li><b>Method -</b> Agile</li>
                                                             <li><b>Communication -</b> E-mail, Skype, Slack, Business Communication Tools</li>
                                                         </ul>
-                                                        <a href="/contanct" className="rr-primary-btn">
+                                                        <Link href="/contact" className="rr-primary-btn">
                                                         Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
-                                                        </a>
+                                                        </Link>
                                                     </article>
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
@@ -256,10 +256,10 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                             <li><b>Method -</b> Agile</li>
                                                             <li><b>Communication -</b> E-mail, Skype, Slack, Business Communication Tools</li>
                                                         </ul>
-                                                        <a href="/contanct" className="rr-primary-btn">
+                                                        <Link href="/contact" className="rr-primary-btn">
                                                         Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
-                                                        </a>
+                                                        </Link>
                                                     </article>
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
