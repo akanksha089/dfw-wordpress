@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function Header() {
@@ -9,8 +9,8 @@ export default function Header() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const router = useRouter();
-  const isHomePage = router.pathname === '/';
+  // const router = useRouter();
+  // const isHomePage = router.pathname === '/';
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   // Slugify helper
@@ -142,7 +142,7 @@ export default function Header() {
 
                         {hasDropdown && (
                        <ul className={`${(item.title === 'Staff Augmentation' || item.title === 'Services') ? 'dropdown-grid' : ''}`}>
-                        
+
                             {item.subtitles.map((sub, subIndex) => (
                               <li key={subIndex}>
                                 {item.title === 'Staff Augmentation' ? (

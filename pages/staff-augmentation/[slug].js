@@ -35,7 +35,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
     if (!slug) {
         return <div>Loading...</div>;
     }
-   
+
     return (
         <div className="body">
             <Header />
@@ -87,7 +87,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
                     <section className="service-section-3 pb-130 fade-wrapper">
                         <div className="container">
                             <div className="section_heading mb-3 mb-md-4 mb-xl-5">
-                                <h2 className='text-center'>
+                                <h2 className="section-title text-center" data-text-animation data-split="word" data-duration="1">
                                     Our Dedicated Developer Diverse Hiring Models
                                 </h2>
                                 <p>
@@ -185,7 +185,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                         </ul>
                                                         {/* <a href="/contanct" className="btn_primary">Talk to Consultant</a> */}
                                                         <Link href="/contact" className="rr-primary-btn">
-                                                        Talk to Consultant
+                                                            Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
                                                         </Link>
                                                     </article>
@@ -221,14 +221,14 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                             <li><b>Communication -</b> E-mail, Skype, Slack, Business Communication Tools</li>
                                                         </ul>
                                                         <Link href="/contact" className="rr-primary-btn">
-                                                        Talk to Consultant
+                                                            Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
                                                         </Link>
                                                     </article>
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
                                                     <figure className="business-models-img text-center">
-                                                    <img
+                                                        <img
                                                             alt=""
                                                             src="/assets/img/service/service-3.jpg"
                                                             className="content_img lazyloaded h-[340px]"
@@ -257,14 +257,14 @@ const StaffAugmentationPage = ({ subtitle }) => {
                                                             <li><b>Communication -</b> E-mail, Skype, Slack, Business Communication Tools</li>
                                                         </ul>
                                                         <Link href="/contact" className="rr-primary-btn">
-                                                        Talk to Consultant
+                                                            Talk to Consultant
                                                             <i className="fa-regular fa-arrow-right"></i>
                                                         </Link>
                                                     </article>
                                                 </div>
                                                 <div className="col-md-5 order-md-1">
                                                     <figure className="business-models-img text-center">
-                                                    <img
+                                                        <img
                                                             alt=""
                                                             src="/assets/img/service/service-4.jpg"
                                                             className="content_img lazyloaded h-[340px]"
@@ -280,7 +280,141 @@ const StaffAugmentationPage = ({ subtitle }) => {
 
                         </div>
                     </section>
-                    <Footer data={settingdata}/>
+
+                    <section className="process-section-2 pb-130 fade-wrapper">
+                        <div className="container">
+                            <div className="section-heading text-center">
+                                <span className="bg-text">Studio</span>
+                                <h4 className="sub-heading" data-text-animation="fade-in" data-duration="1.5">
+                                    Work Process
+                                </h4>
+                                <h2 className="section-title" data-text-animation data-split="word" data-duration="1">
+                                    Quality Service For Growth <br /> Your Branding Identity
+                                </h2>
+                            </div>
+                            <div className="row gy-lg-4 gy-4 ">
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="process-box fade-top">
+                                        <span className="number">01</span>
+                                        <h3 className="title">Client Consultation</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="process-box fade-top">
+                                        <span className="number">02</span>
+                                        <h3 className="title">Research and Analysis</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="process-box fade-top">
+                                        <span className="number">03</span>
+                                        <h3 className="title">Project Revisions Launch</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6 ">
+                                    <div className="process-box fade-top">
+                                        <span className="number">04</span>
+                                        <h3 className="title">Client Consultation</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="process-box fade-top">
+                                        <span className="number">05</span>
+                                        <h3 className="title">Research and Analysis</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="process-box fade-top">
+                                        <span className="number">06</span>
+                                        <h3 className="title">Project Revisions Launch</h3>
+                                        <p>Autem vel eum repreh enderit eui in ea velit esse quame nihil molestiae</p>
+                                        <a href="about.html" className="read-more">
+                                            Read More <i className="fa-sharp fa-regular fa-chevrons-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="reward-section fade-wrapper pb-130">
+                        <div className="container">
+                            <div className="section-heading text-center">
+                                <span className="bg-text">Awards</span>
+                                <h4 className="sub-heading" data-text-animation="fade-in" data-duration="1.5">
+                                    Our Rewards From Awards Shows
+                                </h4>
+                                <h2 className="section-title" data-text-animation data-split="word" data-duration="1">
+                                    Our Most Demanding Awards <br /> that we got
+                                </h2>
+                            </div>
+                            <div className="reward-items">
+                                {[
+                                    {
+                                        year: "Main Developer 2020",
+                                        title: "New York Design Week",
+                                        number: "01",
+                                    },
+                                    {
+                                        year: "UI/UX Designer 2021",
+                                        title: "Best in Jury's Selection",
+                                        number: "02",
+                                    },
+                                    {
+                                        year: "Top 15 Website 2023",
+                                        title: "Webby's, Site of the Year",
+                                        number: "03",
+                                    },
+                                    {
+                                        year: "Best Developer 2024",
+                                        title: "Webby's, Site of the Year",
+                                        number: "04",
+                                    },
+                                ].map((reward, index) => (
+                                    <div className="reward-item fade-top" key={index}>
+                                        <div
+                                            className="bg-img"
+                                            style={{ backgroundImage: "url('/assets/img/bg-img/reward-bg.png')" }}
+                                        ></div>
+                                        <div className="reward-left">
+                                            <h4 className="date">{reward.year}</h4>
+                                        </div>
+                                        <div className="reward-right-wrap">
+                                            <div className="reward-middle">
+                                                <h2 className="title">{reward.title}</h2>
+                                            </div>
+                                            <div className="reward-right">
+                                                <span className="number">{reward.number}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <Footer data={settingdata} />
                 </div>
             </div>
         </div>
