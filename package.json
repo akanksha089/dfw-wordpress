@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
+    "dompurify": "^3.2.5",
     "gsap": "^3.12.7",
     "html-react-parser": "^5.2.2",
     "next": "15.1.5",
