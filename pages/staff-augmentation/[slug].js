@@ -63,7 +63,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
     }, [slug]);
 
     const handleTabClick = (index) => setActiveTab(index);
-
+console.log('loading', loading)
     if (!slug) {
         return <div>Loading...</div>;
     }
