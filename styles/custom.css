@@ -490,7 +490,7 @@ body {
   grid-template-columns: repeat(3, 1fr) !important;
   /* gap: 10px; */
   gap: 5px;
-  width: 520px !important;
+  width: 550px !important;
   min-width: 300px;
   position: absolute;
   z-index: 10;

@@ -85,7 +85,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
              {/* Add your global stylesheets here */}
              {/* <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
                     <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
