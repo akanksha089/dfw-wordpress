@@ -20,7 +20,7 @@ export default function Footer({data}) {
               <div className="widget-header">
                 <div className="footer-logo ">
                   <Link href="/">
-                    <img src="\assets\img\logo\dfw.png" alt="logo" />
+                    <img src="\assets\img\logo\dfw-light.png" alt="logo" />
                   </Link>
                 </div>
               </div>

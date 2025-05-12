@@ -116,7 +116,7 @@ export default function Header() {
         <div className="primary-header-inner">
           <div className="header-logo d-lg-block">
             <Link href="/" legacyBehavior>
-              <a><img src="/assets/img/logo/dfw.png" alt="Logo" /></a>
+              <a><img src="/assets/img/logo/dfw-light.png" alt="Logo" /></a>
             </Link>
           </div>
           <div className="header-right-wrap">
