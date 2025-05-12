@@ -276,7 +276,8 @@ console.log('loading', loading)
 
 // Fetch dynamic routes for each subtitle (the slugs)
 export async function getStaticPaths() {
-    const res = await fetch('http://dfwebsolutions.com:8080/wp-json/cmd/v1/menu-items');
+        const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const res = await fetch(`${BASE_URL}/cmd/v1/menu-items`);
     const menuItems = await res.json();
     const staffAugmentation = menuItems.find(item => item.title === 'Staff Augmentation');
 
@@ -293,8 +294,8 @@ export async function getStaticPaths() {
 // Fetch subtitle data for each slug at build time
 export async function getStaticProps({ params }) {
     const { slug } = params;
-
-    const res = await fetch('http://dfwebsolutions.com:8080/wp-json/cmd/v1/menu-items');
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const res = await fetch(`${BASE_URL}/cmd/v1/menu-items`);
     const menuItems = await res.json();
     const staffAugmentation = menuItems.find(item => item.title === 'Staff Augmentation');
     const subtitle = staffAugmentation.subtitles.find(sub => sub.replace(/\s+/g, '-').toLowerCase() === slug);
