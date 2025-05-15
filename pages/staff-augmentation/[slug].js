@@ -63,7 +63,7 @@ const StaffAugmentationPage = ({ subtitle }) => {
     }, [slug]);
 
     const handleTabClick = (index) => setActiveTab(index);
-console.log('loading', loading)
+    console.log('loading', loading)
     if (!slug) {
         return <div>Loading...</div>;
     }
@@ -177,7 +177,7 @@ console.log('loading', loading)
                                                             <h3>{tabTitles[index]}</h3> {/* Display the title */}
                                                             <p>Select a {tabTitles[index]} as per the project requirement. Here is what you will get: </p>
                                                             <ul className="check_list">
-                                                            {ReactHtmlParser(contentHtml)}
+                                                                {ReactHtmlParser(contentHtml)}
                                                             </ul>
                                                             <Link href="/contact" className="rr-primary-btn mt-3 d-inline-block">
                                                                 Talk to Consultant
@@ -212,7 +212,7 @@ console.log('loading', loading)
                                     <h4 className="sub-heading" data-text-animation="fade-in" data-duration="1.5">
                                         {content.sectionTitles[2] || 'Work Process'}</h4>)}
                                 {content && (
-                                            <h2 className="section-title" data-text-animation data-split="word" data-duration="1">{content.sectionTitles[8] || 'Quality Service For Growth Your Branding Identity'}</h2>)}
+                                    <h2 className="section-title" data-text-animation data-split="word" data-duration="1">{content.sectionTitles[8] || 'Quality Service For Growth Your Branding Identity'}</h2>)}
                             </div>
                             <div className="row gy-lg-4 gy-4">
                                 {workProcess.map((step, i) => (
@@ -276,7 +276,7 @@ console.log('loading', loading)
 
 // Fetch dynamic routes for each subtitle (the slugs)
 export async function getStaticPaths() {
-        const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     const res = await fetch(`${BASE_URL}/cmd/v1/menu-items`);
     const menuItems = await res.json();
     const staffAugmentation = menuItems.find(item => item.title === 'Staff Augmentation');

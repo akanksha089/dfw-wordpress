@@ -79,6 +79,9 @@ export default function Home() {
 
   return (
     <div className="body">
+         {/* <Head>
+        <meta name="robots" content="noindex" />
+      </Head> */}
       <Header />
       <Sidebar data = {settingdata}/>
       <div id="smooth-wrapper">

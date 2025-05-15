@@ -85,6 +85,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta name="robots" content="noindex" />
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
              {/* Add your global stylesheets here */}
              {/* <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />

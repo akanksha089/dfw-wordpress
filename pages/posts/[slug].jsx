@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import ReactHtmlParser from 'html-react-parser';
 import {  fetchContactData } from '../../lib/api';
 import Sidebar from '../../components/Sidebar';
+import Head from 'next/head';
+
 export default function Post({ post, posts }) {
     const [settingdata, setsettingData] = useState(null);
   // const backgroundStyle = {
@@ -41,6 +43,9 @@ const backgroundStyle = {
        }, []);
   return (
     <div className="body">
+          <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
       <Header />
               <Sidebar data={settingdata}/>
       <div id="popup-search-box">
