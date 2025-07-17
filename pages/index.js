@@ -16,7 +16,7 @@ import { fetchCustomApiData, fetchContactData } from '../lib/api';
 export default function Home() {
   const [settingdata, setsettingData] = useState(null);
   const  setError = useState(null);
-  const [about, setAbout] = useState(null); // State to hold the about data
+  const [about, setAbout] = useState(null); 
   const [processes, setprocess] = useState(null); // State to hold the process data
   const [service, setService] = useState(null); // State to hold the service data
   const [growth, setGrowth] = useState(null); // State to hold the growth data

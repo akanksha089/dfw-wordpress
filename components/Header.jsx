@@ -4,48 +4,46 @@ import Link from 'next/link';
 
 export default function Header() {
   const [menuItems, setMenuItems] = useState([]);
-  const [serviceData, setServiceData] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const router = useRouter();
-  // const isHomePage = router.pathname === '/';
   const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   // Slugify helper
   const slugify = (str) =>
-    str
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '') // Remove special chars
-      .replace(/\s+/g, '-'); // Replace spaces with -
+    str.toLowerCase().trim()
+      .replace(/[^\w\s-]/g, '') // remove special chars
+      .replace(/\s+/g, '-'); // replace spaces with dashes
 
-  // Fetch Services (for Services submenu)
+  // Reorder Menu
+  const reorderMenuItems = (items) => {
+    const desiredOrder = ['Home', 'About', 'Services', 'Staff Augmentation', 'Blog', 'Contact'];
+    const ordered = desiredOrder
+      .map((title) => items.find((item) => item.title === title))
+      .filter(Boolean);
+    const others = items.filter((item) => !desiredOrder.includes(item.title));
+    return [...ordered, ...others];
+  };
+
+  // Fetch both Menu and Services
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchAll = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/custom/v1/services/`);
-        if (!response.ok) throw new Error('Failed to fetch services');
-        const data = await response.json();
-        setServiceData(data);
-      } catch (err) {
-        setError(err);
-      }
-    };
-    fetchServices();
-  }, []);
+        const [menuRes, servicesRes] = await Promise.all([
+          fetch(`${BASE_URL}/cmd/v1/menu-items`),
+          fetch(`${BASE_URL}/custom/v1/services/`),
+        ]);
 
-  // Fetch Menu Items
-  useEffect(() => {
-    const fetchMenuItems = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/cmd/v1/menu-items`);
-        if (!response.ok) throw new Error('Failed to fetch menu items');
-        const data = await response.json();
+        if (!menuRes.ok || !servicesRes.ok) throw new Error('Failed to fetch data');
 
-        // Normalize Staff Augmentation subtitles if they are plain strings
-        const updatedItems = data.map((item) => {
+        const [menuData, serviceData] = await Promise.all([
+          menuRes.json(),
+          servicesRes.json(),
+        ]);
+
+        // Normalize Staff Augmentation
+        const normalizedMenu = menuData.map((item) => {
           if (item.title === 'Staff Augmentation' && Array.isArray(item.subtitles)) {
             return {
               ...item,
@@ -58,45 +56,31 @@ export default function Header() {
           return item;
         });
 
-        const orderedMenuItems = reorderMenuItems(updatedItems);
-        setMenuItems(orderedMenuItems);
+        // Inject services into "Services" menu
+        const injectedMenu = normalizedMenu.map((item) =>
+          item.title === 'Services'
+            ? {
+                ...item,
+                subtitles: serviceData.map((service) => ({
+                  title: service.title,
+                  slug: service.slug || slugify(service.title),
+                })),
+              }
+            : item
+        );
+
+        // Set final ordered menu
+        setMenuItems(reorderMenuItems(injectedMenu));
       } catch (err) {
         setError(err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
-    fetchMenuItems();
+
+    fetchAll();
   }, []);
-
-  // Inject services into "Services" menu
-  useEffect(() => {
-    if (serviceData.length > 0) {
-      setMenuItems((prev) =>
-        prev.map((item) =>
-          item.title === 'Services'
-            ? {
-              ...item,
-              subtitles: serviceData.map((service) => ({
-                title: service.title,
-                slug: service.slug || slugify(service.title),
-              })),
-            }
-            : item
-        )
-      );
-    }
-  }, [serviceData]);
-
-  // Reorder Menu
-  const reorderMenuItems = (items) => {
-    const desiredOrder = ['Home', 'About', 'Services', 'Staff Augmentation', 'Blog', 'Contact'];
-    const ordered = desiredOrder
-      .map((title) => items.find((item) => item.title === title))
-      .filter(Boolean);
-    const others = items.filter((item) => !desiredOrder.includes(item.title));
-    return [...ordered, ...others];
-  };
 
   // Handle Sidebar Toggle
   useEffect(() => {
@@ -107,6 +91,9 @@ export default function Header() {
     }
     return () => document.body.classList.remove('open-sidebar');
   }, [sidebarOpen]);
+
+  if (loading) return null;
+  if (error) return <div>Error loading menu</div>;
 
   return (
 
