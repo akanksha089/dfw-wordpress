@@ -208,7 +208,7 @@ function Service({ service }) {
                                                              right: '0'
                                                         }}>
                                                             <img
-                                                                src="assets/img/project/project-1.png"
+                                                                src={item?.acf_image}
                                                                 alt="Project"
                                                                 style={{
                                                                     maxWidth: '100%'    
