@@ -16,7 +16,10 @@ function Service() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
+
+    
     console.log('loadingerror', loading, error)
+    console.log('serviceDataserviceDataserviceData', serviceData)
    useEffect(() => {
         const fetchData = async () => {
             try {
@@ -33,7 +36,8 @@ function Service() {
     useEffect(() => {
         const serviceFetchData = async () => {
             try {
-                const response = await fetch( `${BASE_URL}/custom/v1/services/`);
+                 // const response = await fetch( `http://dfw.local/wp-json/custom/v1/services/`);
+               const response = await fetch( `${BASE_URL}/custom/v1/services/`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
