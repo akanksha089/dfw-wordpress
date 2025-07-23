@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import Head from 'next/head';
+ import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
@@ -7,7 +7,26 @@ import Link from 'next/link';
 import ReactHtmlParser from 'html-react-parser';
 import { fetchCustomApiData, fetchContactData } from '../lib/api';
 
-function About() {
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wp/v2/pages?slug=about-us`);
+  const data = await res.json();
+
+  if (!data || data.length === 0) {
+    return { notFound: true };
+  }
+
+  const page = data[0];
+  const { meta_title, meta_description } = page.acf || {};
+  return {
+    props: {
+      title: meta_title || page.title.rendered,
+      description: meta_description || '',
+    },
+    revalidate: 60, // Regenerate every 60 seconds (ISR)
+  };
+}
+
+function About({ title, description }) {
     const [about, setAbout] = useState(null);
     const [testiData, setTestiData] = useState(null);
     const [processes, setprocess] = useState(null); // State to hold the process data
@@ -199,6 +218,11 @@ function About() {
 
     return (
         <div className="body">
+              <Head>
+                    <title>{title}</title>
+                    <meta name="title" content={title} />
+                    <meta name="description" content={description} />
+                  </Head>
             <Header />
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">

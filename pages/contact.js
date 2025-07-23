@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from 'react';
-// import Head from 'next/head';
+import  { useState, useEffect } from 'react';
+ import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import { fetchContactData } from '../lib/api';
-// import './custom.css';
-// const Preloader = () => (
-//     <div id="preloader">
-//       <div className="loading" data-loading-text="Digital"></div>
-//     </div>
-//   );
-function Contact() {
+
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wp/v2/pages?slug=contact-us`);
+  const data = await res.json();
+
+  if (!data || data.length === 0) {
+    return { notFound: true };
+  }
+
+  const page = data[0];
+  const { meta_title, meta_description } = page.acf || {};
+  return {
+    props: {
+      title: meta_title || page.title.rendered,
+      description: meta_description || '',
+    },
+    revalidate: 60, // Regenerate every 60 seconds (ISR)
+  };
+}
+
+function Contact({ title, description }) {
     // const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
     const  setError = useState(0);
@@ -81,6 +95,11 @@ console.log(data);
 
     return (
         <div className="body">
+                <Head>
+                            <title>{title}</title>
+                            <meta name="title" content={title} />
+                            <meta name="description" content={description} />
+                        </Head>
             <Header />
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">

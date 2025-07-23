@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from 'react';
-// import Head from 'next/head';
+import  { useEffect, useState } from 'react';
+ import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import { fetchContactData } from '../lib/api';
-//  const Preloader = () => (
-//      <div id="preloader">
-//       <div className="loading" data-loading-text="Digital"></div>
-//      </div>
-//    );
-function Service() {
+
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wp/v2/pages?slug=service`);
+  const data = await res.json();
+
+  if (!data || data.length === 0) {
+    return { notFound: true };
+  }
+
+  const page = data[0];
+  const { meta_title, meta_description } = page.acf || {};
+  return {
+    props: {
+      title: meta_title || page.title.rendered,
+      description: meta_description || '',
+    },
+    revalidate: 60, // Regenerate every 60 seconds (ISR)
+  };
+}
+function Service({ title, description }) {
     const [data, setData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; 
+    const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    
+
     console.log('loadingerror', loading, error)
     console.log('serviceDataserviceDataserviceData', serviceData)
-   useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await fetchContactData();
@@ -36,8 +50,8 @@ function Service() {
     useEffect(() => {
         const serviceFetchData = async () => {
             try {
-                 // const response = await fetch( `http://dfw.local/wp-json/custom/v1/services/`);
-               const response = await fetch( `${BASE_URL}/custom/v1/services/`);
+                // const response = await fetch( `http://dfw.local/wp-json/custom/v1/services/`);
+                const response = await fetch(`${BASE_URL}/custom/v1/services/`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -49,21 +63,20 @@ function Service() {
                 setLoading(false);
             }
         };
- serviceFetchData();
+        serviceFetchData();
     }, []);
 
 
 
 
     return (
-        // <div className="text-white ">
         <div className="body ">
 
-            {/* <Head>
-                <title>{default_meta_title}</title>
-                <meta name="description" content={default_meta_description} />
-                <meta name="keyword" content={default_meta_keyword} />
-            </Head> */}
+            <Head>
+                <title>{title}</title>
+                <meta name="title" content={title} />
+                <meta name="description" content={description} />
+            </Head>
             <Header />
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">
@@ -120,7 +133,7 @@ function Service() {
                         <div className="container">
 
                             <div className="row gy-5">
-                                {serviceData  && serviceData.length > 0 ? (
+                                {serviceData && serviceData.length > 0 ? (
                                     serviceData.map((item, index) => (
                                         <div key={index} className="col-lg-3 col-md-6">
                                             <div className="service-item md-pb-30">
@@ -167,18 +180,18 @@ function Service() {
                                         style={{ opacity: 1 }}
                                     >
                                         <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)',  marginLeft: '6px' }}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>H</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>a</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>v</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>e</div>
                                             </div>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)',  marginLeft: '6px' }}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>A</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>n</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>y</div>
                                             </div>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)'  ,marginLeft: '6px' }}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>P</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>r</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>o</div>
@@ -188,11 +201,11 @@ function Service() {
                                                 <div className="char" style={{ display: 'inline-block' }}>t</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>s</div>
                                             </div>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)'  ,marginLeft: '6px'}}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>O</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>n</div>
                                             </div>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)'  ,marginLeft: '6px'}}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>M</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>i</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>n</div>
@@ -202,7 +215,7 @@ function Service() {
                                             </div>
                                         </div>
                                         <div className="line" style={{ display: 'block', textAlign: 'start', width: '100%' }}>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)',  marginLeft: '6px' }}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>C</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>o</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>n</div>
@@ -211,7 +224,7 @@ function Service() {
                                                 <div className="char" style={{ display: 'inline-block' }}>c</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>t</div>
                                             </div>
-                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)',  marginLeft: '6px' }}>
+                                            <div className="word" style={{ display: 'inline-block', translate: 'none', rotate: 'none', scale: 'none', opacity: 1, transform: 'translate(0px, 0px)', marginLeft: '6px' }}>
                                                 <div className="char" style={{ display: 'inline-block' }}>U</div>
                                                 <div className="char" style={{ display: 'inline-block' }}>s</div>
                                             </div>

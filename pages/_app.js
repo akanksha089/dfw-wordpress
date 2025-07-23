@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import '../styles/globals.css';
 import '../styles/custom.css';
  import '../styles/nitro.css'; 
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
@@ -84,22 +84,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <meta name="robots" content="noindex" />
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-             {/* Add your global stylesheets here */}
-             {/* <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-                    <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
-                    <link rel="stylesheet" href="/assets/css/venobox.min.css" />
-                    <link rel="stylesheet" href="/assets/css/animate.min.css" />
-                    <link rel="stylesheet" href="/assets/css/keyframe-animation.css" />
-                    <link rel="stylesheet" href="/assets/css/odometer.min.css" />
-                    <link rel="stylesheet" href="/assets/css/nice-select.css" />
-                    <link rel="stylesheet" href="/assets/css/swiper.min.css" />
-                    <link rel="stylesheet" href="/assets/css/main.css" />
-                    <link rel="stylesheet" href="/assets/css/carouselTicker.css" />
-                    <link rel="stylesheet" href="/assets/css/main.css.map" /> */}
-      </Head>
 
       <Component {...pageProps} />
          {/* Floating WhatsApp Button */}

@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* ✅ Correct way to add external CSS files */}
+                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
                     <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
                     <link rel="stylesheet" href="/assets/css/venobox.min.css" />

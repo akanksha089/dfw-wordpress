@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Head from 'next/head';
 import Header from '../components/Header';
 import Link from 'next/link';
@@ -144,6 +144,7 @@ const ServiceDetails = () => {
                 <div className="body">
                     <Head>
                         <title>{meta_title}</title>
+                             <meta name="title" content={meta_title} />
                         <meta name="description" content={meta_description} />
                         <meta name="keyword" content={meta_keyword} />
                     </Head>

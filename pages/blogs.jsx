@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
+ import Head from 'next/head';
 import { fetchPosts, fetchContactData } from '../lib/api';
 import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
-export default function Blog({  initialPosts, totalPages }) {
+
+
+
+export default function Blog({  initialPosts, totalPages, title, description  }) {
   const [posts, setPosts] = useState(initialPosts); // Initial posts in state
   const [currentPage, setCurrentPage] = useState(1);
   const [settingdata, setsettingData] = useState(null);
@@ -32,6 +36,11 @@ export default function Blog({  initialPosts, totalPages }) {
  
   return (
     <div className="body">
+        <Head>
+                <title>{title}</title>
+                <meta name="title" content={title} />
+                <meta name="description" content={description} />
+            </Head>
       <Header />
          <Sidebar data = {settingdata}/>
       <div id="popup-search-box">
@@ -159,11 +168,22 @@ export default function Blog({  initialPosts, totalPages }) {
 export async function getStaticProps() {
   const postsPerPage = 5; // Number of posts per page
   const { data, totalPages } = await fetchPosts(1, postsPerPage); // Fetch the first set of posts
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/wp/v2/pages?slug=blog`);
+  const result = await res.json();
 
+  if (!result || result.length === 0) {
+    return { notFound: true };
+  }
+
+  const page = result[0];
+  const { meta_title, meta_description } = page.acf || {};
   return {
     props: {
       initialPosts: data,
       totalPages: totalPages,
+       title: meta_title || page.title.rendered,
+      description: meta_description || '',
     },
+    
   };
 }
