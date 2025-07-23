@@ -169,8 +169,9 @@ function Service({ service }) {
                                                     }}
                                                 >
                                                     <div className="content-left" style={{ flex: 1, minWidth: '250px' }}>
-                                                        <p style={{ marginBottom: '30px' ,  maxWidth: '560px' , width: '100%'}}>
-                                                            Conubia elementum sodales molestie tempus gravida massa porta. Iaculis gravida feugiat tempor nulla orci imperdiet at aenean
+                                                        <p style={{ marginBottom: '30px' ,  maxWidth: '560px' , width: '100%'}} dangerouslySetInnerHTML={{ __html: item?.short_description }}>
+                                                            
+                                                           {/* {item?.short_description} */}
                                                         </p>
                                                         <a
                                                             // href={`/service/${item.slug}`}

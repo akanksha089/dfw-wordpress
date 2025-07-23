@@ -87,7 +87,7 @@ const AboutSection = ({ about }) => {
               <div className="about-img-2 reveal">
                 <img
                   className="img-2"
-                  src="/assets/img/images/about-img-1.jpg"
+                  src={about && about.second_image}
                   alt="img"
                   layout="fill"
                   style={{ objectFit: 'cover' }}

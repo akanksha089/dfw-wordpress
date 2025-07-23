@@ -244,7 +244,7 @@ function About() {
                                             <img src={about && about.image} alt="about" />
                                         </div>
                                         <div className="img-2 reveal">
-                                            <img src="assets/img/images/about-img-3.jpg" alt="about" />
+                                            <img src={about && about.second_image} alt="about" />
                                         </div>
                                     </div>
                                 </div>
@@ -621,7 +621,7 @@ function About() {
                                             <img className="img-1" src={company && company.image} alt="img" />
                                         </div>
                                         <div className="about-img-2 reveal">
-                                            <img className="img-2" src="assets/img/images/about-img-9.png" alt="img" />
+                                            <img className="img-2" src={company && company.second_image} alt="img" />
                                         </div>
                                     </div>
                                 </div>
